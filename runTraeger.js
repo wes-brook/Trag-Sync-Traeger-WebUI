@@ -5,8 +5,8 @@ import TraegerManager from "./manager.js";
 import { createLogger, format, transports } from "winston";
 
 // Constants
-const _username = process.env.USERNAME;
-const _password = process.env.PASSWORD;
+const _username = process.env.USERNAME_;
+const _password = process.env.PASSWORD_;
 
 // Logger Setup
 const logger = createLogger({
@@ -57,12 +57,12 @@ function callMe(eventGrill) {
 // Initialize the Traeger Manager
 const manager = new TraegerManager(_username, _password, 10, 5);
 
-// Register the event listener for each grill :: 5 second timeout to wait for manager to fetch grills
+// Register the event listener for each grill :: 10 second timeout to wait for manager to fetch grills
 setTimeout(() => {
   manager.api.grills.forEach((grill) => {
     grill.registerListener(callMe);
   });
-}, 5000);
+}, 10000); // NOTE: Wes this could become a bottleneck for end users if the AWS server doesn't initialize our grills in time (10s timeout)
 
 // Keep the script running
 setInterval(() => {
