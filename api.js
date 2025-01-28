@@ -8,7 +8,7 @@ const TRAEGER_CLIENT_ID = "2fuohjtqv1e63dckp5v84rau0j"; // Traeger-ID
 const AMAZON_COMMAND_CODES = {
   refresh: 90,
 };
-const HTTP_TIMEOUT = 20000;
+const HTTP_TIMEOUT = 30000; // Increased to 30s from 20s
 
 class Api {
   constructor(
@@ -64,7 +64,7 @@ class Api {
       return;
     }
 
-    console.debug("Cognito Refresh Triggered");
+    console.debug("Cognito Refresh Triggered"); 
     let data;
 
     if (this.cognitoRefreshToken) {
@@ -150,33 +150,40 @@ class Api {
     }
   }
 
-  async updateGrill(grillIdentifier) {
-    const response = await axios.post(
-      `${AMAZON_API_ENDPOINT}/things/${grillIdentifier}/commands`, // NOTE: Wes, potential bottleneck here where post request fails because AWS exceeded the alotted timeout (20s) to resolve the promise
-      {                                                            //       Code failed during execution due to this 1/28/2025 @12:19am
-        command: AMAZON_COMMAND_CODES.refresh,
-      },
-      {
-        headers: {
-          Authorization: this.cognitoDetails.AccessToken,
-          "Content-Type": "application/json",
-          "Accept-Language": "en-us",
-          "X-Amz-Date": this.getAmzDate(),
-          "User-Agent": "Traeger/11 CFNetwork/1209 Darwin/20.2.0",
-        },
-        timeout: HTTP_TIMEOUT,
+  async updateGrill(grillIdentifier, retries = 3, delay = 5000) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await axios.post(
+          `${AMAZON_API_ENDPOINT}/things/${grillIdentifier}/commands`,
+          {
+            command: AMAZON_COMMAND_CODES.refresh,
+          },
+          {
+            headers: {
+              Authorization: this.cognitoDetails.AccessToken,
+              "Content-Type": "application/json",
+              "Accept-Language": "en-us",
+              "X-Amz-Date": this.getAmzDate(),
+              "User-Agent": "Traeger/11 CFNetwork/1209 Darwin/20.2.0",
+            },
+            timeout: HTTP_TIMEOUT,
+          }
+        );
+  
+        if (response.status === 200) {
+          const grill = this.grills.find((g) => g.identifier === grillIdentifier);
+          if (grill) {
+            grill.pushData(response.data); // Update the grill data
+          }
+          return; // Exit the function on success
+        }
+      } catch (error) {
+        console.error(`Attempt ${attempt} failed for grill ${grillIdentifier}:`, error.message);
+        if (attempt === retries) {
+          throw new Error(`Failed to update grill: ${grillIdentifier} after ${retries} attempts`);
+        }
+        await new Promise((resolve) => setTimeout(resolve, delay * Math.pow(2, attempt - 1))); // Exponential backoff
       }
-    );
-
-    // console.debug("Update Grill Response:", response.data); // Log the response data
-
-    if (response.status === 200) {
-      const grill = this.grills.find((g) => g.identifier === grillIdentifier);
-      if (grill) {
-        grill.pushData(response.data); // Update the grill data
-      }
-    } else {
-      throw new Error(`Failed to update grill: ${grillIdentifier}`);
     }
   }
 
