@@ -152,8 +152,8 @@ class Api {
 
   async updateGrill(grillIdentifier) {
     const response = await axios.post(
-      `${AMAZON_API_ENDPOINT}/things/${grillIdentifier}/commands`,
-      {
+      `${AMAZON_API_ENDPOINT}/things/${grillIdentifier}/commands`, // NOTE: Wes, potential bottleneck here where post request fails because AWS exceeded the alotted timeout (20s) to resolve the promise
+      {                                                            //       Code failed during execution due to this 1/28/2025 @12:19am
         command: AMAZON_COMMAND_CODES.refresh,
       },
       {
