@@ -4,41 +4,176 @@ const smokerData = {
   currentTemp: 149,
   setTemp: 170,
   probeTemp: 50,
-  time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  time: "4:33 PM"
 };
 </script>
 
 <template>
-  <div class="h-screen bg-gradient-to-r from-slate-50 via-[25%] via-[#C3713E] to-neutral-700 flex items-center justify-center">
-    <UContainer>
-      <UCard class="ring-neutral-800/60 bg-neutral-800/60 text-white rounded-2xl shadow-2xl w-[580px] h-[400px] relative">
-        <!-- Header -->
-        <div class="flex justify-between items-center ml-[10px]">
-          <div class="font-inter text-[40px] text-[#D8D8D8] font-black">{{ smokerData.grillName }}</div>
-        </div>
+  <!-- Full-width background -->
+  <div class="traeger-background">
+    <!-- Grill Card -->
+    <div class="grill-card">
+      <!-- Grill Name -->
+      <div class="grill-name">{{ smokerData.grillName }}</div>
 
-        <!-- Temperature Circle & Info -->
-        <div class="absolute left-[50px] top-[100px]">
-          <!-- Temperature Circle -->
-          <div class="relative flex-shrink-0 mt-1 ml-3">
-            <div class="w-[24px] h-[24px] bg-[#10C61C] rounded-full mt-2 absolute"></div>
-            <div class="w-[250px] h-[250px] bg-[#222222] rounded-full flex items-center justify-center border-4 border-[#B65E28]">
-              <span class="font-inter text-[64px] text-[#D8D8D8] font-black italic">{{ smokerData.currentTemp }}°F</span>
-            </div>
-          </div>
-
-          <!-- Time & Temperature Info -->
-          <div class="absolute left-[275px] top-[0px]"> 
-            <p class="font-inter text-[24px] text-[#D8D8D8] font-black italic">{{ smokerData.time }}</p>
-            <p class="font-inter text-[24px] text-[#D8D8D8] font-black italic">
-              <span class="font-inter text-[24px] text-[#D8D8D8] font-black italic">SET TEMP:</span> {{ smokerData.setTemp }}°F
-            </p>
-            <p class="font-inter text-[24px] text-[#D8D8D8] font-black italic">
-              <span class="font-inter text-[24px] text-[#D8D8D8] font-black italic">PROBE TEMP:</span> {{ smokerData.probeTemp }}°F
-            </p>
-          </div>
+      <!-- Grill Temperature Circle -->
+      <div class="grill-temp-layer-1">
+        <div class="grill-temp-layer-2">
+          <span class="grill-temp">{{ smokerData.currentTemp }}°F</span>
         </div>
-      </UCard>
-    </UContainer>
+      </div>
+
+      <!-- Grill Logo -->
+      <div class="grill-logo">
+        <img src="@/assets/grill.png" alt="Grill Logo" class="grill-logo-img" />
+      </div>
+
+      <!-- Grill Status Indicator -->
+      <div class="grill-status-indicator"></div>
+
+      <!-- Time and Temperature Info -->
+      <div class="grill-info">
+        <p class="grill-time">{{ smokerData.time }}</p>
+        <p class="grill-set-temp">SET TEMP: {{ smokerData.setTemp }}°F</p>
+        <p class="grill-probe-temp">PROBE TEMP: {{ smokerData.probeTemp }}°F</p>
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.traeger-background {
+  position: relative;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background: linear-gradient(90deg, #FFFFFF 0%, rgba(196, 113, 62, 0.99) 34.5%, #535353 99.99%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grill Card */
+.grill-card {
+  position: relative; 
+  width: 580px;
+  height: 399px;
+  background: rgba(66, 66, 66, 0.7); 
+  box-shadow: 0px 4px 29.7px 18px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+/* Grill Name */
+.grill-name {
+  position: absolute;
+  max-width: calc(100% - 100px); 
+  height: 48px;
+  left: 35px; /* Relative to the grill card */
+  top: 30px; /* Relative to the grill card */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 48px;
+  color: #D8D8D8;
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflow */
+  text-overflow: ellipsis; /* Adds ellipsis for overflow text */
+}
+
+/* Grill Temperature Circle */
+.grill-temp-layer-1 {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  left: 50px; /* Relative to the grill card */
+  top: 100px; /* Relative to the grill card */
+  background: rgba(182, 94, 40, 0.99);
+  border-radius: 50%;
+}
+
+.grill-temp-layer-2 {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  left: 5px; /* Center inside layer 1 */
+  top: 5px; /* Center inside layer 1 */
+  background: #222222;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grill-temp {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 77px;
+  color: #D8D8D8;
+}
+
+/* Grill Logo */
+.grill-logo {
+  position: absolute;
+  width: 26.23px;
+  height: 27.16px;
+  left: 50px; /* Relative to the grill card */
+  top: 110px; /* Relative to the grill card */
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.grill-logo-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Grill Status Indicator */
+.grill-status-indicator {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 25px; /* Relative to the grill card */
+  top: 160px; /* Relative to the grill card */
+  background: #10C61C;
+  border-radius: 50%;
+}
+
+/* Time and Temperature Info */
+.grill-info {
+  position: absolute;
+  left: 300px; /* Relative to the grill card */
+  top: 110px; /* Relative to the grill card */
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #D8D8D8;
+}
+
+.grill-time {
+  position: absolute;
+  width: 200px;
+  height: 29px;
+  left: -20px;
+  top: 0;
+}
+
+.grill-set-temp {
+  position: absolute;
+  width: 204px;
+  height: 29px;
+  left: 5px;
+  top: 40px;
+}
+
+.grill-probe-temp {
+  position: absolute;
+  width: 228px;
+  height: 29px;
+  left: 20px;
+  top: 80px;
+}
+</style>
