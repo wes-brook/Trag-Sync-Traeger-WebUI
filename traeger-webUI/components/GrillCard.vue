@@ -106,7 +106,7 @@ const smokerData = {
   position: absolute;
   width: 26.23px;
   height: 27.16px;
-  left: 50px; /* Relative to the grill card */
+  left: 45px; /* Relative to the grill card */
   top: 110px; /* Relative to the grill card */
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -121,7 +121,7 @@ const smokerData = {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 25px; /* Relative to the grill card */
+  left: 20px; /* Relative to the grill card */
   top: 160px; /* Relative to the grill card */
   background: #10C61C;
   border-radius: 50%;
