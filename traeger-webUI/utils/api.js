@@ -140,6 +140,7 @@ class Api {
     });
 
     if (response.status === 200) {
+      console.log("getGrills response: ", response.data.things);
       const grills = response.data.things;
       this.grills = grills.map((grill) => new Grill(grill.thingName)); // Create Grill instances
       for (const grill of grills) {
@@ -153,6 +154,7 @@ class Api {
   async updateGrill(grillIdentifier, retries = 3, delay = 5000) {
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
+        console.log(`Grill Identifier: '${grillIdentifier}'`);
         const response = await axios.post(
           `${AMAZON_API_ENDPOINT}/things/${grillIdentifier}/commands`,
           {
@@ -169,11 +171,13 @@ class Api {
             timeout: HTTP_TIMEOUT,
           }
         );
+
+        console.debug(`Grill ${grillIdentifier} update response:`, response.data); // Log the response
   
         if (response.status === 200) {
           const grill = this.grills.find((g) => g.identifier === grillIdentifier);
           if (grill) {
-            console.log("Response data: ", response.data);
+            grill.pushData(response.data); // Update the grill data
           }
           return; // Exit the function on success
         }

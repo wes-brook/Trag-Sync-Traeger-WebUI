@@ -1,11 +1,33 @@
 <script setup>
-const smokerData = {
-  grillName: "THE SMOKER",
-  currentTemp: 149,
-  setTemp: 170,
-  probeTemp: 50,
-  time: "4:33 PM"
+import { ref, onMounted } from 'vue';
+import { getGrillData } from '~/services/api';
+
+const smokerData = ref({
+  grillName: "Grill Name",
+  currentTemp: 0,
+  setTemp: 0,
+  probeTemp: 0,
+  time: "LOADING..."
+});
+
+const fetchGrillData = async () => {
+  const data = await getGrillData();
+  if (data && data.currentTemp !== 0) {
+    smokerData.value = {
+      grillName: data.grillName,
+      currentTemp: data.currentTemp,
+      setTemp: data.setTemp,
+      probeTemp: data.probeTemp,
+      time: data.time,
+    };
+  }
 };
+
+onMounted(() => {
+  fetchGrillData();
+  setInterval(fetchGrillData, 10000); // 10s refresh
+});
+
 </script>
 
 <template>
