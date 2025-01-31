@@ -19,7 +19,10 @@ const fetchGrillData = async () => {
       currentTemp: data.currentTemp,
       setTemp: data.setTemp,
       probeTemp: data.probeTemp,
-      time: data.time,
+      time: new Date(data.time).toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        }).replace(/^0/, ''),
       grillStatus: data.connected || false,
     };
   }
