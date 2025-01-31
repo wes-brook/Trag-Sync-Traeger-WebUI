@@ -1,7 +1,7 @@
 import Mqtt from "./mqtt.js";
 import Api from "./api.js";
 
-const logging = console; // Replace with a logging library if needed
+const logging = console;
 
 class Manager {
   constructor(
@@ -11,16 +11,15 @@ class Manager {
     intervalBusy = 10
   ) {
     this.api = new Api(username, password, intervalIdle, intervalBusy);
+    this.mqttClient = null;
+    this.healthCheckInterval = 20 * 1000; // Check MQTT connection every 20 seconds
 
     // Wait for the API to initialize before proceeding
     this.waitForApiInitialization()
       .then(() => {
-        this.mqttClient = new Mqtt(
-          this.api.getMqttEndpoint(),
-          this.api.grills.map((grill) => grill.identifier)
-        );
-        this.mqttClient.setDataHook(this.mqttEventDispatcher.bind(this));
+        this.initializeMqttClient();
         this.startApiPollingThreads();
+        this.startHealthCheck(); // Start the health check
       })
       .catch((error) => {
         logging.error("Failed to initialize API:", error);
@@ -34,6 +33,23 @@ class Manager {
       logging.debug("Waiting for API to initialize...");
     }
     logging.debug("API initialization complete.");
+  }
+
+  initializeMqttClient() {
+    this.mqttClient = new Mqtt(
+      this.api.getMqttEndpoint(),
+      this.api.grills.map((grill) => grill.identifier)
+    );
+    this.mqttClient.setDataHook(this.mqttEventDispatcher.bind(this));
+  }
+
+  startHealthCheck() {
+    setInterval(() => {
+      if (!this.mqttClient?.client?.connected) {
+        logging.warn("MQTT client is disconnected. Reinitializing...");
+        this.initializeMqttClient(); // Reinitialize the MQTT client
+      }
+    }, this.healthCheckInterval);
   }
 
   startApiPollingThreads() {

@@ -7,18 +7,20 @@ const smokerData = ref({
   currentTemp: 0,
   setTemp: 0,
   probeTemp: 0,
-  time: "LOADING..."
+  time: "LOADING...",
+  grillStatus: false,
 });
 
 const fetchGrillData = async () => {
   const data = await getGrillData();
-  if (data && data.currentTemp !== 0) {
+  if (data && data.currentTemp !== 0) { // Naive solution. Sometimes AWS response gives 0 values which we don't want to display, so just skip that response
     smokerData.value = {
       grillName: data.grillName,
       currentTemp: data.currentTemp,
       setTemp: data.setTemp,
       probeTemp: data.probeTemp,
       time: data.time,
+      grillStatus: data.connected || false,
     };
   }
 };
@@ -49,7 +51,7 @@ onMounted(() => {
       </div>
 
       <!-- Grill Status Indicator -->
-      <div class="grill-status-indicator"></div>
+      <div class="grill-status-indicator" :class="{ 'grill-off': !smokerData.grillStatus }" />
 
       <!-- Time and Temperature Info -->
       <div class="grill-info">
@@ -149,6 +151,11 @@ onMounted(() => {
   border-radius: 50%;
 }
 
+/* Red indicator when the grill is off */
+.grill-status-indicator.grill-off {
+  background: #FF0000;
+}
+
 /* Time and Temperature Info */
 .grill-info {
   position: absolute;
@@ -172,7 +179,7 @@ onMounted(() => {
 
 .grill-set-temp {
   position: absolute;
-  width: 204px;
+  width: 250px;
   height: 29px;
   left: 5px;
   top: 40px;

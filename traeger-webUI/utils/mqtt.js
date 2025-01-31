@@ -9,6 +9,8 @@ class Mqtt {
     this.grills = grills;
     this.client = null;
     this.dataHook = null;
+    this.reconnectAttempts = 0; // Track reconnect attempts
+    this.maxReconnectAttempts = 5; // Maximum number of reconnect attempts
 
     if (immediateInit) {
       this.init();
@@ -28,7 +30,9 @@ class Mqtt {
 
   mqttOnConnect() {
     _LOGGER.debug("Client Connected");
+    this.reconnectAttempts = 0; // Reset reconnect attempts on successful connection
 
+    // Re-subscribe to topics
     for (const grill of this.grills) {
       this.client.subscribe(`prod/thing/update/${grill}`, { qos: 1 }, (err) => {
         if (!err) {
@@ -41,10 +45,8 @@ class Mqtt {
   }
 
   mqttOnConnectFail(err) {
-    _LOGGER.debug(
-      "Connect Fail Callback. Grill Connect Failed! MQTT Client Kill.",
-      err
-    );
+    _LOGGER.debug("Connect Fail Callback. Grill Connect Failed!", err);
+    this.handleReconnect();
   }
 
   mqttOnLog(level, buf) {
@@ -97,6 +99,7 @@ class Mqtt {
 
       this.client.on("connect", () => this.mqttOnConnect());
       this.client.on("error", (err) => this.mqttOnConnectFail(err));
+      this.client.on("close", () => this.handleReconnect()); // Handle connection close
       this.client.on("log", (level, buf) => this.mqttOnLog(level, buf));
       this.client.on("subscribe", (err, granted) =>
         this.mqttOnSubscribe(err, granted)
@@ -108,6 +111,16 @@ class Mqtt {
       _LOGGER.debug(`Connecting to ${mqttParts.host}`);
     } catch (error) {
       _LOGGER.error("Error initializing MQTT:", error);
+    }
+  }
+
+  handleReconnect() {
+    if (this.reconnectAttempts < this.maxReconnectAttempts) {
+      this.reconnectAttempts++;
+      _LOGGER.debug(`Attempting to reconnect (Attempt ${this.reconnectAttempts})...`);
+      this.init(); // Reinitialize the MQTT client
+    } else {
+      _LOGGER.error("Max reconnect attempts reached. Giving up.");
     }
   }
 }

@@ -32,6 +32,7 @@ app.get('/api/grill-data', async (req, res) => {
         currentTemp: grill.data.status?.grill || 0,
         setTemp: grill.data.status?.set || 0,
         probeTemp: grill.data.status?.probe || 0,
+        connected: grill.data.status?.connected || false, // added 1/30/2025 5:33PM
         time: new Date().toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
@@ -52,3 +53,8 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Express server running on http://localhost:${PORT}`);
 });
+
+
+// ISSUE: 1/30/25 Left node server running, but grill was OFF. Turned grill ON, checked the server again 
+//        but theres no response packet from AWS -probably because MQTT client timed out and has no 
+//        refresh system.
