@@ -39,14 +39,26 @@ class Manager {
         const grill = this.api.grills.find((g) => g.identifier === grillIdentifier);
 
         // Check if the grill is online
-        this.isGrillOnline = grill?.data?.status?.connected || false;
-        logging.debug(`Grill is ${this.isGrillOnline ? "online" : "offline"}`);
+        const isGrillOnline = grill?.data?.status?.connected || false;
+        logging.debug(`Grill is ${isGrillOnline ? "online" : "offline"}`);
 
-        // Wake up from sleep mode if the grill comes back online
+        // Update the grill status
+        if (this.isGrillOnline !== isGrillOnline) {
+          this.isGrillOnline = isGrillOnline;
+          logging.debug(`Grill status changed to ${isGrillOnline ? "online" : "offline"}`);
+        }
+
+        // Exit sleep mode if the grill comes back online
         if (this.sleepMode && this.isGrillOnline) {
           logging.debug("Grill is back online. Exiting sleep mode.");
           this.sleepMode = false;
           this.initializeMqttClient(); // Reinitialize the MQTT client
+        }
+
+        // Enter sleep mode if the grill goes offline
+        if (!this.sleepMode && !this.isGrillOnline) {
+          logging.debug("Grill is offline. Entering sleep mode.");
+          this.sleepMode = true;
         }
       }
     } catch (error) {
