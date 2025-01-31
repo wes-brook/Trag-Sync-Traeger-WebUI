@@ -13,6 +13,8 @@ class Manager {
     this.api = new Api(username, password, intervalIdle, intervalBusy);
     this.mqttClient = null;
     this.healthCheckInterval = 20 * 1000; // Check MQTT connection every 20 seconds
+    this.isGrillOnline = false; // Track grill status
+    this.sleepMode = false; // Track sleep mode
 
     // Wait for the API to initialize before proceeding
     this.waitForApiInitialization()
@@ -24,6 +26,33 @@ class Manager {
       .catch((error) => {
         logging.error("Failed to initialize API:", error);
       });
+  }
+
+  async checkGrillStatus() {
+    try {
+      await this.api.init(); // Ensure the API is initialized
+      await this.api.getGrills(); // Fetch grills
+
+      if (this.api.grills.length > 0) {
+        const grillIdentifier = this.api.grills[0].identifier;
+        await this.api.updateGrill(grillIdentifier); // Update grill data
+        const grill = this.api.grills.find((g) => g.identifier === grillIdentifier);
+
+        // Check if the grill is online
+        this.isGrillOnline = grill?.data?.status?.connected || false;
+        logging.debug(`Grill is ${this.isGrillOnline ? "online" : "offline"}`);
+
+        // Wake up from sleep mode if the grill comes back online
+        if (this.sleepMode && this.isGrillOnline) {
+          logging.debug("Grill is back online. Exiting sleep mode.");
+          this.sleepMode = false;
+          this.initializeMqttClient(); // Reinitialize the MQTT client
+        }
+      }
+    } catch (error) {
+      logging.error("Error checking grill status:", error);
+      this.isGrillOnline = false; // Assume grill is offline if there's an error
+    }
   }
 
   async waitForApiInitialization() {
@@ -44,12 +73,24 @@ class Manager {
   }
 
   startHealthCheck() {
-    setInterval(() => {
-      if (!this.mqttClient?.client?.connected) {
-        logging.warn("MQTT client is disconnected. Reinitializing...");
-        this.initializeMqttClient(); // Reinitialize the MQTT client
+    setInterval(async () => {
+      if (this.sleepMode) {
+        logging.debug("Backend is in sleep mode. Skipping health check.");
+        return;
       }
-    }, this.healthCheckInterval);
+
+      await this.checkGrillStatus(); // Check if the grill is online
+
+      if (this.isGrillOnline) {
+        if (!this.mqttClient?.client?.connected) {
+          logging.warn("MQTT client is disconnected. Reinitializing...");
+          this.initializeMqttClient(); // Reinitialize the MQTT client
+        }
+      } else {
+        logging.debug("Grill is offline. Entering sleep mode.");
+        this.sleepMode = true;
+      }
+    }, this.healthCheckInterval); // Run every 20 seconds
   }
 
   startApiPollingThreads() {
