@@ -68,9 +68,12 @@ onMounted(() => {
   position: relative; 
   width: 580px;
   height: 399px;
-  background: rgba(66, 66, 66, 0.7); 
-  box-shadow: 0px 4px 29.7px 18px rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.25); 
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.27);
   border-radius: 20px;
+  backdrop-filter: blur(18.5px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Grill Name */
