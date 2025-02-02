@@ -33,6 +33,7 @@ app.get('/api/grill-data', async (req, res) => {
         setTemp: grill.data.status?.set || 0,
         probeTemp: grill.data.status?.probe || 0,
         connected: grill.data.status?.connected || false, // added 1/30/2025 5:33PM\
+        systemStatus: grill.data.status?.system_status || 99, // added 2/1/2025 2:44PM
         time: new Date().toISOString()
         // time: new Date().toLocaleTimeString([], {
         //     hour: '2-digit',

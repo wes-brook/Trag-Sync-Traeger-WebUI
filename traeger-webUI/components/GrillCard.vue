@@ -1,29 +1,59 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { getGrillData } from '~/services/api';
+import GrillStatusIndicator from '~/components/GrillStatusIndicator.vue';
 
 const smokerData = ref({
   grillName: "Grill Name",
   currentTemp: 0,
   setTemp: 0,
   probeTemp: 0,
-  time: "LOADING...",
-  grillStatus: false,
+  time: "err",
+  grillSystemStatus: 99, // Default status
+});
+
+// Computed property to determine the temperature display
+const temperatureDisplay = computed(() => {
+  if (smokerData.value.grillSystemStatus === 1) {
+    return "---°F"; // Offline
+  } else {
+    return `${smokerData.value.currentTemp}°F`; // Sleeping or Idle
+  }
+});
+
+// Computed property to determine the status text display
+const statusTextDisplay = computed(() => {
+  switch (smokerData.value.grillSystemStatus) {
+    case 1: // Offline
+      return "OFFLINE";
+    case 2: // Sleeping
+      return "SLEEPING";
+    case 3: // Idle
+      return "IDLE";
+    default:
+      return "99 UNKNOWN"; // Default to the 99 error status
+  }
+});
+
+// Computed property to determine the opacity of SET TEMP and PROBE TEMP
+// Opacity 1 if grillSystemStatus is 3, 4, 5, 6 or 7
+const infoOpacity = computed(() => {
+    return [3, 4, 5, 6, 7].includes(smokerData.value.grillSystemStatus) ? 1 : 0.5; // 100% for Idle, 50% otherwise
 });
 
 const fetchGrillData = async () => {
   const data = await getGrillData();
-  if (data && data.currentTemp !== 0) { // Naive solution. Sometimes AWS response gives 0 values which we don't want to display, so just skip that response
+  if (data && data.currentTemp !== 0) {
     smokerData.value = {
       grillName: data.grillName,
       currentTemp: data.currentTemp,
       setTemp: data.setTemp,
       probeTemp: data.probeTemp,
       time: new Date(data.time).toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-        }).replace(/^0/, ''),
-      grillStatus: data.connected || false,
+        hour: '2-digit',
+        minute: '2-digit',
+      }).replace(/^0/, ''),
+      grillSystemStatus: data.systemStatus || 99,
     };
   }
 };
@@ -32,37 +62,36 @@ onMounted(() => {
   fetchGrillData();
   setInterval(fetchGrillData, 10000); // 10s refresh
 });
-
 </script>
 
 <template>
-    <!-- Grill Card -->
-    <div class="grill-card">
-      <!-- Grill Name -->
-      <div class="grill-name">{{ smokerData.grillName }}</div>
+  <!-- Grill Card -->
+  <div class="grill-card">
+    <!-- Grill Name -->
+    <div class="grill-name">{{ smokerData.grillName }}</div>
 
-      <!-- Grill Temperature Circle -->
-      <div class="grill-temp-layer-1">
-        <div class="grill-temp-layer-2">
-          <span class="grill-temp">{{ smokerData.currentTemp }}°F</span>
-        </div>
-      </div>
-
-      <!-- Grill Logo -->
-      <div class="grill-logo">
-        <img src="@/assets/grill.png" alt="Grill Logo" class="grill-logo-img" />
-      </div>
-
-      <!-- Grill Status Indicator -->
-      <div class="grill-status-indicator" :class="{ 'grill-off': !smokerData.grillStatus }" />
-
-      <!-- Time and Temperature Info -->
-      <div class="grill-info">
-        <p class="grill-time">{{ smokerData.time }}</p>
-        <p class="grill-set-temp">SET TEMP: {{ smokerData.setTemp }}°F</p>
-        <p class="grill-probe-temp">PROBE TEMP: {{ smokerData.probeTemp }}°F</p>
+    <!-- Grill Temperature Circle -->
+    <div class="grill-temp-layer-1">
+      <div class="grill-temp-layer-2">
+        <span class="grill-temp">{{ temperatureDisplay }}</span>
       </div>
     </div>
+
+    <!-- Grill Logo -->
+    <div class="grill-logo">
+      <img src="@/assets/grill.png" alt="Grill Logo" class="grill-logo-img" />
+    </div>
+
+    <!-- Grill Status Indicator -->
+    <GrillStatusIndicator :status="smokerData.grillSystemStatus" />
+
+    <!-- Time and Temperature Info -->
+    <div class="grill-info">
+      <p class="grill-time">{{ statusTextDisplay }} {{ smokerData.time }}</p>
+      <p class="grill-set-temp" :style="{ opacity: infoOpacity }">SET TEMP: {{ smokerData.setTemp }}°F</p>
+      <p class="grill-probe-temp" :style="{ opacity: infoOpacity }">PROBE TEMP: {{ smokerData.probeTemp }}°F</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -146,22 +175,6 @@ onMounted(() => {
   height: 100%;
 }
 
-/* Grill Status Indicator */
-.grill-status-indicator {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  left: 20px; /* Relative to the grill card */
-  top: 160px; /* Relative to the grill card */
-  background: #10C61C;
-  border-radius: 50%;
-}
-
-/* Red indicator when the grill is off */
-.grill-status-indicator.grill-off {
-  background: #FF0000;
-}
-
 /* Time and Temperature Info */
 .grill-info {
   position: absolute;
@@ -189,6 +202,7 @@ onMounted(() => {
   height: 29px;
   left: 5px;
   top: 40px;
+  transition: opacity 0.3s ease;
 }
 
 .grill-probe-temp {
@@ -197,5 +211,6 @@ onMounted(() => {
   height: 29px;
   left: 20px;
   top: 80px;
+  transition: opacity 0.3s ease;
 }
 </style>
