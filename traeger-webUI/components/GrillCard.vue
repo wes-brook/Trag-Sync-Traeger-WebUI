@@ -8,7 +8,7 @@ const smokerData = ref({
   currentTemp: 0,
   setTemp: 0,
   probeTemp: 0,
-  time: "err",
+  time: "n/a",
   grillSystemStatus: 99, // Default status
 });
 
@@ -30,8 +30,20 @@ const statusTextDisplay = computed(() => {
       return "SLEEPING";
     case 3: // Idle
       return "IDLE";
+    case 4: // Igniting
+      return "IGNITING";
+    case 5: // Preheating
+      return "PREHEATING";
+    case 6: // Manual Cook
+      return "COOKING";
+    case 8: // Cool Down
+        return "COOLING";
+    case 9: // Shut Down
+        return "SHUT DOWN";
+    case 10: // Unknown Status - Server Side AWS error (bad)
+        return "AWS ERR"
     default:
-      return "99 UNKNOWN"; // Default to the 99 error status
+      return "CLIENT ERROR"; // Unknown Status - Client Side error (very bad)
   }
 });
 

@@ -15,9 +15,20 @@ const statusColor = computed(() => {
       return "#3D10C6";
     case 3: // Idle
       return "#C6C610";
-    // need to add 4-9 here except 7
+    case 4: // Igniting
+      return "#10C61C";
+    case 5: // Preheating
+      return "#10C61C"
+    case 6: // Manual Cooking (Cooking)
+      return "#10C0C6";
+    case 8: // Cooling
+      return "#C61013";
+    case 9: // Shutdown
+      return "#10C61C"
+    case 10: // Unknown Status - Server Side AWS error (bad)
+      return "#C610B9";
     default:
-      return "#C610B9"; // Default color for unknown status
+      return "#000000"; // Unknown Status - Client Side error (very bad)
   }
 });
 </script>
