@@ -9,8 +9,8 @@ const props = defineProps({
 
 const statusColor = computed(() => {
   switch (props.status) {
-    case 1: // Offline
-      return "#C61013";
+    // case 1: // Offline
+    //   return "#C61013";
     case 2: // Sleeping
       return "#3D10C6";
     case 3: // Idle
@@ -27,6 +27,8 @@ const statusColor = computed(() => {
       return "#10C61C"
     case 10: // Unknown Status - Server Side AWS error (bad)
       return "#C610B9";
+    case 99: // think this means server online but grill is physically off (unplugged or plugged but switched off)
+      return "#C61013";
     default:
       return "#000000"; // Unknown Status - Client Side error (very bad)
   }

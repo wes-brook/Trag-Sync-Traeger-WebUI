@@ -8,7 +8,7 @@ const smokerData = ref({
   currentTemp: 0,
   setTemp: 0,
   probeTemp: 0,
-  time: "n/a",
+  time: "[X:XX]",
   grillSystemStatus: 99, // Default status
 });
 
@@ -24,8 +24,8 @@ const temperatureDisplay = computed(() => {
 // Computed property to determine the status text display
 const statusTextDisplay = computed(() => {
   switch (smokerData.value.grillSystemStatus) {
-    case 1: // Offline
-      return "OFFLINE";
+    // case 1: // Offline
+    //   return "OFFLINE";
     case 2: // Sleeping
       return "SLEEPING";
     case 3: // Idle
@@ -42,8 +42,10 @@ const statusTextDisplay = computed(() => {
         return "SHUT DOWN";
     case 10: // Unknown Status - Server Side AWS error (bad)
         return "AWS ERR"
+    case 99: // think this means server online but grill is physically off (unplugged or plugged but switched off)
+        return "OFFLINE"
     default:
-      return "CLIENT ERROR"; // Unknown Status - Client Side error (very bad)
+      return "SERVER DOWN"; // Unknown Status - Client Side error (very bad)
   }
 });
 
@@ -202,7 +204,7 @@ onMounted(() => {
 
 .grill-time {
   position: absolute;
-  width: 200px;
+  width: 300px;
   height: 29px;
   left: -15px;
   top: 0;
