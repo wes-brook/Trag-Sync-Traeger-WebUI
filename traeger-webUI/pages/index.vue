@@ -3,44 +3,44 @@
 </script>
 
 <template>
-    <div class="home">
+    <div id="app">
         <!-- Background -->
         <div class="background"></div>
 
-        <!-- Header -->
-        <header class="header flex justify-between items-center p-4 bg-gray-800 text-white">
-            <!-- Home Button -->
-            <NuxtLink to="/" class="text-lg font-bold">Home</NuxtLink>
-
-            <!-- GitHub Link -->
-            <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M12 .296c-6.63 0-12 5.372-12 12 0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.165c-3.338.724-4.033-1.416-4.033-1.416-.547-1.39-1.335-1.758-1.335-1.758-1.091-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.495.996.108-.775.418-1.305.762-1.605-2.665-.302-5.466-1.332-5.466-5.93 0-1.31.469-2.383 1.235-3.222-.123-.303-.535-1.52.116-3.163 0 0 1.008-.322 3.3 1.23a11.61 11.61 0 013.005-.404c1.02.005 2.047.138 3.005.404 2.291-1.552 3.3-1.23 3.3-1.23.653 1.643.24 2.86.117 3.163.77.839 1.234 1.912 1.234 3.222 0 4.61-2.807 5.625-5.479 5.922.43.372.823 1.104.823 2.226v3.293c0 .32.192.693.8.577C20.565 22.094 24 17.598 24 12.296c0-6.628-5.373-12-12-12z" />
-                </svg>
-            </a>
-        </header>
-
-
-        <!-- Landing Title -->
-        <h1 class="landing-title">Finally, a way to monitor my pellet smoker on the web</h1>
-
-        <!-- Landing Description -->
-        <p class="landing-description">Your favorite pellet smoker company doesn’t have an official web solution to monitor your grill, so I made one myself.</p>
-
-        <!-- Get Started Button -->
-        <div class="buttons">
-            <div class="get-started-button">
-                <NuxtLink to="/grill" class="button-text">Get Started</NuxtLink>
+        <!-- Container for constrained content -->
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-content">
+                <NuxtLink to="/" class="text-lg font-bold text-[#D8D8D8]">TW</NuxtLink>
+                <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
+                    <svg class="w-5 h-5" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12 .296c-6.63 0-12 5.372-12 12 0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.165c-3.338.724-4.033-1.416-4.033-1.416-.547-1.39-1.335-1.758-1.335-1.758-1.091-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.495.996.108-.775.418-1.305.762-1.605-2.665-.302-5.466-1.332-5.466-5.93 0-1.31.469-2.383 1.235-3.222-.123-.303-.535-1.52.116-3.163 0 0 1.008-.322 3.3 1.23a11.61 11.61 0 013.005-.404c1.02.005 2.047.138 3.005.404 2.291-1.552 3.3-1.23 3.3-1.23.653 1.643.24 2.86.117 3.163.77.839 1.234 1.912 1.234 3.222 0 4.61-2.807 5.625-5.479 5.922.43.372.823 1.104.823 2.226v3.293c0 .32.192.693.8.577C20.565 22.094 24 17.598 24 12.296c0-6.628-5.373-12-12-12z" />
+                    </svg>
+                </a>
             </div>
-            <a href="https://github.com" class="github-link"></a>
+            </header>
+
+            <!-- Landing Section -->
+            <div class="landing-content">
+                <h1 class="landing-title">Finally, a way to monitor <br> my pellet smoker on the web</h1>
+                <p class="landing-description">
+                    Your favorite pellet smoker company doesn’t have an official web solution to
+                    <br> monitor your grill, so I made one myself.
+                </p>
+                <NuxtLink to="/grill" class="get-started-button">
+                    <span class="button-text">Get Started</span>
+                </NuxtLink>
+            </div>
         </div>
 
-        <!-- Section Divider Background -->>
-        <div class="section-divider-background">
-
-        </div>
-
+        <!-- Section Divider -->
+        <section class="section-with-background">
+            <!-- <div class="section-divider-container flex justify-center items-center z-[1]" /> -->
+            <img src="../assets/traeger_web-ui-app.png" alt="grill app" class="w-[50%] h-[50%] fixed-image rounded-[20px] shadow-[0px_4px_36.5px_15px_rgba(0,0,0,0.25)] z-[2] mx-auto my-auto">
+        </section>
+        
         <!-- Footer -->
         <footer class="footer">
             <p class="footer-text">© Wesly Barayuga | MIT License</p>
@@ -49,54 +49,90 @@
 </template>
 
 <style scoped>
-.home {
+/* Global Styles */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+#app {
     display: flex;
     flex-direction: column;
+    min-height: 300vh; 
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* Background */
 .background {
     position: absolute;
     width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+    height: 100%; /* Ensure it covers the full height */
     background: linear-gradient(90deg, #535353 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
     z-index: -1;
+    top: 0;
+    left: 0;
 }
 
-/* Landing Title */
+/* Container to constrain content */
+.container {
+    width: 80%; /* Matches .landing-title */
+    max-width: 1200px; /* Ensures a consistent max width */
+    margin: 0 auto; /* Centers the content */
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem 0;
+    background: rgba(0, 0, 0, 0.25); /* Semi-transparent white background */
+
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+
+
+.header-content {
+    width: 80%; /* Keep the width constrained */
+    max-width: 1200px;
+    display: flex;
+    justify-content: center; /* Centers the content */
+    align-items: center;
+    gap: 54rem; /* Adjust spacing between elements */
+    padding: 0 2rem; /* Add horizontal padding */
+}
+
+/* Landing Section */
 .landing-title {
-    position: absolute;
-    width: 1366px;
-    height: 232px;
-    left: calc(50% - 1366px / 2);
-    top: 270px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
+    font-size: 4rem;
     font-weight: 900;
-    font-size: 96px;
-    line-height: 116px;
     text-align: center;
     color: #000000;
     opacity: 0.9;
+    margin-top: 10rem;
+    width: 100%;
 }
 
-/* Landing Description */
 .landing-description {
-    position: absolute;
-    width: 1169px;
-    height: 78px;
-    left: calc(50% - 1169px / 2);
-    top: 553px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
+    font-size: 1.5rem;
     font-weight: 400;
-    font-size: 32px;
-    line-height: 39px;
     text-align: center;
     color: #000000;
     opacity: 0.7;
+    margin-top: 1rem;
+    width: 100%;
 }
 
 /* Get Started Button */
@@ -108,84 +144,78 @@
     align-items: center;
     padding: 12px;
     gap: 8px;
-    position: absolute;
+    position: relative;
     width: 134px;
     height: 47px;
-    left: calc(50% - 134px / 2);
-    top: 660px;
-    background: #2c2c2c;
-    border: 1px solid #2c2c2c;
+    background: rgba(44, 44, 44, 0.45);
     border-radius: 20px;
+    backdrop-filter: blur(18.5px);
+    -webkit-backdrop-filter: blur(4px);
+    margin: 2rem auto;
+    transition: background-color 0.1s;
+    text-align: center;
     cursor: pointer;
 }
 
+.get-started-button:hover {
+    background: rgba(26, 26, 26, 0.50);
+}
+
 .button-text {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 100%;
+    font-size: 1rem;
     color: #f5f5f5;
+    text-decoration: none;
+}
+
+/* Container for the section with the rotated background */
+.section-with-background {
+    position: relative;
+    /* overflow: hidden; /* Hide any overflow caused by the rotated background */
+    padding: 10rem 0; /* Add padding for content spacing */
+    margin-top: 4rem;
+}
+
+/* Rotated background using a pseudo-element */
+.section-with-background::before {
+    content: '';
+    position: absolute;
+    width: 120vw; /* Wider than the viewport to account for rotation */
+    height: 100%; /* Full height of the container */
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) rotate(-8deg); /* Center and rotate */
+    background: #ffffff; /* Background color */
+    z-index: -1; /* Place it behind the content */
 }
 
 /* Footer */
 .footer {
-    position: absolute;
     width: 100%;
-    height: 64px;
-    left: 0;
-    top: calc(100% - 64px);
+    padding: 1rem;
     background: rgba(0, 0, 0, 0.25);
     opacity: 0.5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    margin-top: auto;
 }
 
 .footer-text {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: center;
+    font-size: 1rem;
     color: #000000;
     opacity: 0.6;
 }
 
-/* Header */
-.header {
-    position: absolute;
-    width: 100%;
-    height: 64px;
-    left: 0px;
-    top: 0px;
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .landing-title {
+        font-size: 2.5rem;
+    }
 
-    background: rgba(0, 0, 0, 0.25);
-    opacity: 0.5;
+    .landing-description {
+        font-size: 1rem;
+    }
 
-}
-
-.header-text {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: center;
-    color: #000000;
-    opacity: 0.6;
-}
-
-/* Section Divider Background*/
-.section-divider-background {
-position: absolute;
-width: 4132px;
-height: 1088.66px;
-left: -665px;
-top: 1107.06px;
-
-background: #FFFFFF;
-transform: rotate(-8deg);
+    .get-started-button {
+        width: 80%;
+    }
 }
 </style>
