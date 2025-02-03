@@ -182,6 +182,7 @@ onMounted(() => {
   left: 45px; /* Relative to the grill card */
   top: 110px; /* Relative to the grill card */
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  opacity: 75%;
 }
 
 .grill-logo-img {
