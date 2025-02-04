@@ -1,7 +1,7 @@
 <script setup>
 const refreshPage = (event) => {
-    event.preventDefault(); // Prevent default navigation
-    window.location.reload(); // Refresh the page
+    event.preventDefault(); 
+    window.location.reload(); 
 };
 </script>
 
@@ -15,14 +15,14 @@ const refreshPage = (event) => {
             <!-- Header -->
             <header class="header">
                 <div class="header-content">
-                <NuxtLink to="/" class="text-lg font-bold text-[#D8D8D8]" @click.native="refreshPage">TW</NuxtLink>
-                <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
-                    <svg class="w-5 h-5" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M12 .296c-6.63 0-12 5.372-12 12 0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.165c-3.338.724-4.033-1.416-4.033-1.416-.547-1.39-1.335-1.758-1.335-1.758-1.091-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.495.996.108-.775.418-1.305.762-1.605-2.665-.302-5.466-1.332-5.466-5.93 0-1.31.469-2.383 1.235-3.222-.123-.303-.535-1.52.116-3.163 0 0 1.008-.322 3.3 1.23a11.61 11.61 0 013.005-.404c1.02.005 2.047.138 3.005.404 2.291-1.552 3.3-1.23 3.3-1.23.653 1.643.24 2.86.117 3.163.77.839 1.234 1.912 1.234 3.222 0 4.61-2.807 5.625-5.479 5.922.43.372.823 1.104.823 2.226v3.293c0 .32.192.693.8.577C20.565 22.094 24 17.598 24 12.296c0-6.628-5.373-12-12-12z" />
-                    </svg>
-                </a>
-            </div>
+                    <NuxtLink to="/" class="text-base font-bold text-[#D8D8D8] hover:text-[#B0B0B0]" @click.native="refreshPage">TW</NuxtLink>
+                    <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
+                        <svg class="w-5 h-5 hover:fill-[#737373]" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 .296c-6.63 0-12 5.372-12 12 0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.165c-3.338.724-4.033-1.416-4.033-1.416-.547-1.39-1.335-1.758-1.335-1.758-1.091-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.495.996.108-.775.418-1.305.762-1.605-2.665-.302-5.466-1.332-5.466-5.93 0-1.31.469-2.383 1.235-3.222-.123-.303-.535-1.52.116-3.163 0 0 1.008-.322 3.3 1.23a11.61 11.61 0 013.005-.404c1.02.005 2.047.138 3.005.404 2.291-1.552 3.3-1.23 3.3-1.23.653 1.643.24 2.86.117 3.163.77.839 1.234 1.912 1.234 3.222 0 4.61-2.807 5.625-5.479 5.922.43.372.823 1.104.823 2.226v3.293c0 .32.192.693.8.577C20.565 22.094 24 17.598 24 12.296c0-6.628-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                </div>
             </header>
 
             <!-- Landing Section -->
@@ -32,9 +32,17 @@ const refreshPage = (event) => {
                     Your favorite pellet smoker company doesn’t have an official web solution to
                     <br> monitor your grill, so I made one myself.
                 </p>
-                <NuxtLink to="/grill" class="get-started-button animate-text">
-                    <span class="button-text">Get Started</span>
-                </NuxtLink>
+                <div class="flex items-center justify-center animate-text">
+                    <NuxtLink to="/grill" class="get-started-button">
+                        <span class="button-text">Get Started</span>
+                    </NuxtLink>
+                    <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
+                        <svg class="w-11 h-11 hover:fill-[#B0B0B0]" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 .296c-6.63 0-12 5.372-12 12 0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.165c-3.338.724-4.033-1.416-4.033-1.416-.547-1.39-1.335-1.758-1.335-1.758-1.091-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.495.996.108-.775.418-1.305.762-1.605-2.665-.302-5.466-1.332-5.466-5.93 0-1.31.469-2.383 1.235-3.222-.123-.303-.535-1.52.116-3.163 0 0 1.008-.322 3.3 1.23a11.61 11.61 0 013.005-.404c1.02.005 2.047.138 3.005.404 2.291-1.552 3.3-1.23 3.3-1.23.653 1.643.24 2.86.117 3.163.77.839 1.234 1.912 1.234 3.222 0 4.61-2.807 5.625-5.479 5.922.43.372.823 1.104.823 2.226v3.293c0 .32.192.693.8.577C20.565 22.094 24 17.598 24 12.296c0-6.628-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -75,7 +83,8 @@ html {
     position: absolute;
     width: 100%;
     height: 100%; /* Ensure it covers the full height */
-    background: linear-gradient(90deg, #535353 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
+    /* background: linear-gradient(90deg, #535353 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */
+    background: linear-gradient(90deg, #3e3e3e 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
     z-index: -1;
     top: 0;
     left: 0;
@@ -93,16 +102,16 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.25rem 0;
-    background: rgba(0, 0, 0, 0.25); /* Semi-transparent white background */
-
+    padding: 0.5rem 0;
+    background: rgba(0, 0, 0, 0.15); /* Semi-transparent white background */
+    
     color: #F5F5F5;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 10;
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    /* box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2); Soft shadow */
 }
 
 .header-content {
@@ -115,22 +124,34 @@ html {
 }
 
 /* Landing Section */
+.landing-content {
+margin: 0px;
+}
+
+.landing-content .flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* Reduce the gap */
+    margin-top: 1.5rem; /* Adjust spacing */
+}
+
 .landing-title {
-    font-size: 5rem;
+    font-size: clamp(2rem, 6vw, 4.5rem); /* Scales between 2.5rem and 5rem */
     font-weight: 900;
     text-align: center;
-    color: #000000e8;
-    opacity: 0.9;
-    margin-top: 15rem;
+    color: #000000;
+    /* opacity: 0.9; */
+    margin-top: 10rem;
     width: 100%;
 }
 
 .landing-description {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Adjusts between 1rem and 1.5rem */
     font-weight: 400;
     text-align: center;
     color: #00000094;
-    opacity: 0.7;
+    opacity: 0.85;
     margin-top: 1rem;
     width: 100%;
 }
@@ -151,7 +172,7 @@ html {
     border-radius: 20px;
     backdrop-filter: blur(18.5px);
     -webkit-backdrop-filter: blur(4px);
-    margin: 2rem auto;
+    margin: 0;
     transition: background-color 0.1s;
     text-align: center;
     cursor: pointer;
@@ -162,7 +183,7 @@ html {
 }
 
 .button-text {
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
     color: #f5f5f5;
     text-decoration: none;
 }
@@ -172,7 +193,7 @@ html {
     position: relative;
     /* overflow: hidden; /* Hide any overflow caused by the rotated background */
     padding: 11rem 0; /* Add padding for content spacing */
-    margin-top: 10rem;
+    margin-top: 8rem;
 }
 
 /* Rotated background using a pseudo-element */
@@ -207,17 +228,14 @@ html {
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .landing-title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 6vw, 3rem); /* Ensures readability */
     }
 
     .landing-description {
-        font-size: 1rem;
-    }
-
-    .get-started-button {
-        width: 80%;
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
     }
 }
+
 
 /* Animation for text */
 .animate-text {
