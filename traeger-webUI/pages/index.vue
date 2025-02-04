@@ -65,7 +65,7 @@ html {
 #app {
     display: flex;
     flex-direction: column;
-    min-height: 300vh; 
+    min-height: 250vh; 
     position: relative;
     overflow-x: hidden;
 }
@@ -172,7 +172,7 @@ html {
     position: relative;
     /* overflow: hidden; /* Hide any overflow caused by the rotated background */
     padding: 11rem 0; /* Add padding for content spacing */
-    margin-top: 7rem;
+    margin-top: 10rem;
 }
 
 /* Rotated background using a pseudo-element */
