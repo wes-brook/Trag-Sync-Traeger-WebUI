@@ -1,5 +1,8 @@
 <script setup>
-
+const refreshPage = (event) => {
+    event.preventDefault(); // Prevent default navigation
+    window.location.reload(); // Refresh the page
+};
 </script>
 
 <template>
@@ -12,7 +15,7 @@
             <!-- Header -->
             <header class="header">
                 <div class="header-content">
-                <NuxtLink to="/" class="text-lg font-bold text-[#D8D8D8]">TW</NuxtLink>
+                <NuxtLink to="/" class="text-lg font-bold text-[#D8D8D8]" @click.native="refreshPage">TW</NuxtLink>
                 <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
                     <svg class="w-5 h-5" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -24,12 +27,12 @@
 
             <!-- Landing Section -->
             <div class="landing-content">
-                <h1 class="landing-title">Finally, a way to monitor <br> my pellet smoker on the web</h1>
-                <p class="landing-description">
+                <h1 class="landing-title animate-text">Finally, a way to monitor <br> my pellet smoker on the web</h1>
+                <p class="landing-description animate-text">
                     Your favorite pellet smoker company doesn’t have an official web solution to
                     <br> monitor your grill, so I made one myself.
                 </p>
-                <NuxtLink to="/grill" class="get-started-button">
+                <NuxtLink to="/grill" class="get-started-button animate-text">
                     <span class="button-text">Get Started</span>
                 </NuxtLink>
             </div>
@@ -38,7 +41,7 @@
         <!-- Section Divider -->
         <section class="section-with-background">
             <!-- <div class="section-divider-container flex justify-center items-center z-[1]" /> -->
-            <img src="../assets/traeger_web-ui-app.png" alt="grill app" class="w-[50%] h-[50%] fixed-image rounded-[20px] shadow-[0px_4px_36.5px_15px_rgba(0,0,0,0.25)] z-[2] mx-auto my-auto">
+            <img src="../assets/traeger_web-ui-app.png" alt="grill app" class="w-[35%] fixed-image rounded-[20px] shadow-[0px_4px_36.5px_15px_rgba(0,0,0,0.25)] z-[2] mx-auto my-auto">
         </section>
         
         <!-- Footer -->
@@ -93,7 +96,7 @@ html {
     padding: 0.25rem 0;
     background: rgba(0, 0, 0, 0.25); /* Semi-transparent white background */
 
-    color: white;
+    color: #F5F5F5;
     width: 100%;
     position: fixed;
     top: 0;
@@ -102,26 +105,23 @@ html {
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
 
-
-
 .header-content {
     width: 80%; /* Keep the width constrained */
     max-width: 1200px;
     display: flex;
-    justify-content: center; /* Centers the content */
+    justify-content: space-between;
     align-items: center;
-    gap: 54rem; /* Adjust spacing between elements */
     padding: 0 2rem; /* Add horizontal padding */
 }
 
 /* Landing Section */
 .landing-title {
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 900;
     text-align: center;
-    color: #000000;
+    color: #000000e8;
     opacity: 0.9;
-    margin-top: 10rem;
+    margin-top: 15rem;
     width: 100%;
 }
 
@@ -129,7 +129,7 @@ html {
     font-size: 1.5rem;
     font-weight: 400;
     text-align: center;
-    color: #000000;
+    color: #00000094;
     opacity: 0.7;
     margin-top: 1rem;
     width: 100%;
@@ -171,8 +171,8 @@ html {
 .section-with-background {
     position: relative;
     /* overflow: hidden; /* Hide any overflow caused by the rotated background */
-    padding: 10rem 0; /* Add padding for content spacing */
-    margin-top: 4rem;
+    padding: 11rem 0; /* Add padding for content spacing */
+    margin-top: 7rem;
 }
 
 /* Rotated background using a pseudo-element */
@@ -216,6 +216,38 @@ html {
 
     .get-started-button {
         width: 80%;
+    }
+}
+
+/* Animation for text */
+.animate-text {
+    opacity: 0; /* Start with invisible text */
+    transform: translateY(12px); /* Start slightly below */
+    animation: fadeInUp 0.5s ease-out forwards; /* Apply animation */
+}
+
+/* Delay animations for each element */
+.landing-title.animate-text {
+    animation-delay: 0.1s; /* Delay for the title */
+}
+
+.landing-description.animate-text {
+    animation-delay: 0.2s; /* Delay for the description */
+}
+
+.get-started-button.animate-text {
+    animation-delay: 0.3s; /* Delay for the button */
+}
+
+/* Keyframes for the fadeInUp animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 </style>

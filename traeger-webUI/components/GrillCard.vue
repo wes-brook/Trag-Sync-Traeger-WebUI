@@ -14,7 +14,7 @@ const smokerData = ref({
 
 // Computed property to determine the temperature display
 const temperatureDisplay = computed(() => {
-  if (smokerData.value.grillSystemStatus === 1) {
+  if (smokerData.value.grillSystemStatus === 99) {
     return "---°F"; // Offline
   } else {
     return `${smokerData.value.currentTemp}°F`; // Sleeping or Idle
