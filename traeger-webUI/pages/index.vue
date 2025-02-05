@@ -1,4 +1,37 @@
 <script setup>
+import { animate, spring} from "motion";
+import { ref, onMounted } from 'vue';
+
+const leftTitle = ref(null);
+const leftDescription = ref(null);
+const rightTitle = ref(null);
+const rightDescription = ref(null);
+let hasAnimated = false;
+
+const handleScroll = () => {
+  if (!hasAnimated && window.scrollY > 50) { // start landing-section-divider animation on first downward scroll
+    hasAnimated = true;
+
+    // Animate left column elements
+    animate(leftTitle.value, { x: [150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
+    animate(leftDescription.value, { x: [150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+
+    // Animate right column elements
+    animate(rightTitle.value, { x: [-150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
+    animate(rightDescription.value, { x: [-150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+
+    window.removeEventListener("scroll", handleScroll); // Remove event listener after animation
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
 const refreshPage = (event) => {
     event.preventDefault(); 
     window.location.reload(); 
@@ -48,9 +81,32 @@ const refreshPage = (event) => {
 
         <!-- Section Divider -->
         <section class="section-with-background">
-            <!-- <div class="section-divider-container flex justify-center items-center z-[1]" /> -->
-            <img src="../assets/traeger_web-ui-app.png" alt="grill app" class="w-[35%] fixed-image rounded-[20px] shadow-[0px_4px_36.5px_15px_rgba(0,0,0,0.25)] z-[2] mx-auto my-auto">
+            <div class="flex items-center justify-evenly">
+                <!-- Left Column -->
+                <div class="flex flex-col justify-end items-end text-right mt-[18rem]">
+                    <p ref="leftDescription" class="landing-section-description">
+                        With this custom web interface you can grill<br>like a pro, even when you’re away from the smoker.
+                    </p>
+                    <h2 ref="leftTitle" class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2>
+                </div>
+            
+                <!-- Center Image -->
+                <img src="../assets/traeger_web-ui-app.png" 
+                    alt="grill app" 
+                    class="max-w-[45%] min-w-[200px] rounded-[20px] 
+                           shadow-[0px_4px_36.5px_15px_rgba(0,0,0,0.25)] 
+                           z-[2] mx-4">
+            
+                <!-- Right Column -->
+                <div class="flex flex-col justify-end items-start text-left mb-[18rem]">
+                    <h2 ref="rightTitle" class="landing-section-title">Smart Grilling<br>Brought To The Web</h2>
+                    <p ref="rightDescription" class="landing-section-description">
+                        View your pellet smoker in real-time from your phone,<br>tablet, or computer. Track your cook—all from the<br>convenience of your web browser.
+                    </p>
+                </div>
+            </div>
         </section>
+
         
         <!-- Footer -->
         <footer class="footer">
@@ -209,6 +265,29 @@ margin: 0px;
     z-index: -1; /* Place it behind the content */
 }
 
+.landing-section-title {
+    font-size: clamp(2rem, 2vw, 4.5rem); /* Scales between 2.5rem and 5rem */
+    font-weight: 900;
+    /* text-align: center; */
+    color: #000000;
+    line-height: 55px;
+    /* opacity: 0.9; */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.landing-section-description {
+    font-size: clamp(1rem, 0.75vw, 2.5rem); /* Scales between 2.5rem and 5rem */
+    font-weight: 900;
+    /* text-align: center; */
+    color: #000000;
+    opacity: 0.5;
+    /* margin-top: 10rem; */
+    width: 100%;
+}
+
+
 /* Footer */
 .footer {
     width: 100%;
@@ -267,5 +346,10 @@ margin: 0px;
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.landing-section-title,
+.landing-section-description {
+    opacity: 0; /* Ensure animation starts with invisible text */
 }
 </style>
