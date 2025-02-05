@@ -1,31 +1,50 @@
 <script setup>
 import { animate, spring} from "motion";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const leftTitle = ref(null);
-const leftDescription = ref(null);
-const rightTitle = ref(null);
-const rightDescription = ref(null);
-let hasAnimated = false;
+// Landing content animations
+// TODO
+
+// Section divider animations
+const topTitle = ref(null);
+const topDescription = ref(null);
+const bottomTitle = ref(null);
+const bottomDescription = ref(null);
+
+let hasScrolled = false; // Track if user has scrolled down initially
 
 const handleScroll = () => {
-  if (!hasAnimated && window.scrollY > 50) { // start landing-section-divider animation on first downward scroll
-    hasAnimated = true;
+  if (!hasScrolled && window.scrollY > 50) { // Detect first downward scroll
+    hasScrolled = true;
 
-    // Animate left column elements
-    animate(leftTitle.value, { x: [150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
-    animate(leftDescription.value, { x: [150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
-
-    // Animate right column elements
-    animate(rightTitle.value, { x: [-150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
-    animate(rightDescription.value, { x: [-150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+    // Animate top column elements
+    animate(topTitle.value, { y: [150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
+    animate(topDescription.value, { y: [150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
 
     window.removeEventListener("scroll", handleScroll); // Remove event listener after animation
   }
 };
 
+const observerCallback = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      if (entry.target === bottomTitle.value) {
+        animate(bottomTitle.value, { y: [-150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
+        animate(bottomDescription.value, { y: [-150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+        observer.unobserve(entry.target); // Stop observing after animation runs once
+      }
+    }
+  });
+};
+
 onMounted(() => {
+  // Track the first scroll event
   window.addEventListener("scroll", handleScroll);
+
+  // Use Intersection Observer for bottom elements
+  const observer = new IntersectionObserver(observerCallback, { threshold: 0.2 });
+  if (bottomTitle.value) observer.observe(bottomTitle.value);
+  if (bottomDescription.value) observer.observe(bottomDescription.value);
 });
 
 onUnmounted(() => {
@@ -77,35 +96,37 @@ const refreshPage = (event) => {
                     </a>
                 </div>
             </div>
+            
+            <!-- Section Divider -->
+            <section class="section-with-background">
+                <div class="flex-col">
+                    <!-- Top Column -->
+                    <div class="flex-col justify-end items-start text-right">
+                        <h2 class="landing-section-title mb-[1rem]" ref="topTitle">Smart Grilling<br>Brought To The Web</h2>
+                        <!-- <p ref="rightDescription"class="landing-section-description"> -->
+                        <p class="landing-section-description" ref="topDescription">
+                            View your pellet smoker in real-time from your phone, tablet,<br>
+                            or computer. Track your cook—all from the convenience of your web browser.
+                        </p>
+                    </div>
+                
+                    <!-- Middle Demo Image -->
+                    <img src="../assets/traeger_web-ui-app.png" alt="grill app demo" class="w-full rounded-[20px] mt-[1.5rem] mb-[1.5rem]">
+                
+                    <!-- Bottom Column -->
+                    <div class="flex-col justify-end items-end text-left">
+                        <!-- <h2 ref="leftTitle" class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2> -->
+                        <h2 class="landing-section-title mb-[1rem]" ref="bottomTitle">Check On Your Grill From<br>Anytime, Anywhere</h2>
+                        <!-- <p ref="leftDescription" class="landing-section-description"> -->
+                        <p class="landing-section-description" ref="bottomDescription">
+                            With this custom web interface you can grill like a<br>pro, even when you’re away from the smoker.
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- Section Divider -->
-        <section class="section-with-background">
-            <div class="flex items-center justify-evenly">
-                <!-- Left Column -->
-                <div class="flex flex-col justify-end items-end text-right mt-[18rem]">
-                    <p ref="leftDescription" class="landing-section-description">
-                        With this custom web interface you can grill<br>like a pro, even when you’re away from the smoker.
-                    </p>
-                    <h2 ref="leftTitle" class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2>
-                </div>
-            
-                <!-- Center Image -->
-                <img src="../assets/traeger_web-ui-app.png" 
-                    alt="grill app" 
-                    class="max-w-[45%] min-w-[200px] rounded-[20px] 
-                           shadow-[0px_4px_36.5px_15px_rgba(0,0,0,0.25)] 
-                           z-[2] mx-4">
-            
-                <!-- Right Column -->
-                <div class="flex flex-col justify-end items-start text-left mb-[18rem]">
-                    <h2 ref="rightTitle" class="landing-section-title">Smart Grilling<br>Brought To The Web</h2>
-                    <p ref="rightDescription" class="landing-section-description">
-                        View your pellet smoker in real-time from your phone,<br>tablet, or computer. Track your cook—all from the<br>convenience of your web browser.
-                    </p>
-                </div>
-            </div>
-        </section>
+        
 
         
         <!-- Footer -->
@@ -176,12 +197,15 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem; /* Add horizontal padding */
+    /* padding: 0 2rem;  */
 }
 
 /* Landing Section */
 .landing-content {
-margin: 0px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0px auto;
+    padding: 20px;
 }
 
 .landing-content .flex {
@@ -194,12 +218,14 @@ margin: 0px;
 
 .landing-title {
     font-size: clamp(2rem, 6vw, 4.5rem); /* Scales between 2.5rem and 5rem */
+    line-height: 1.4;
     font-weight: 900;
     text-align: center;
     color: #000000;
     /* opacity: 0.9; */
     margin-top: 10rem;
     width: 100%;
+    overflow: hidden;
 }
 
 .landing-description {
@@ -248,7 +274,6 @@ margin: 0px;
 .section-with-background {
     position: relative;
     /* overflow: hidden; /* Hide any overflow caused by the rotated background */
-    padding: 11rem 0; /* Add padding for content spacing */
     margin-top: 8rem;
 }
 
@@ -256,29 +281,26 @@ margin: 0px;
 .section-with-background::before {
     content: '';
     position: absolute;
-    width: 120vw; /* Wider than the viewport to account for rotation */
+    width: 150vw; /* Wider than the viewport to account for rotation */
     height: 100%; /* Full height of the container */
     left: 50%;
     top: 0;
     transform: translateX(-50%) rotate(-8deg); /* Center and rotate */
-    background: #ffffff; /* Background color */
     z-index: -1; /* Place it behind the content */
+    background: rgba(255, 255, 255, 0.75); 
 }
 
 .landing-section-title {
-    font-size: clamp(2rem, 2vw, 4.5rem); /* Scales between 2.5rem and 5rem */
+    font-size: clamp(1.9rem, 2.2vw, 40px); /* Scales between 2.5rem and 5rem */
     font-weight: 900;
     /* text-align: center; */
     color: #000000;
-    line-height: 55px;
     /* opacity: 0.9; */
-    margin-top: 1rem;
-    margin-bottom: 1rem;
     width: 100%;
 }
 
 .landing-section-description {
-    font-size: clamp(1rem, 0.75vw, 2.5rem); /* Scales between 2.5rem and 5rem */
+    font-size: clamp(0.75rem, 1vw, 15px); /* Scales between 2.5rem and 5rem */
     font-weight: 900;
     /* text-align: center; */
     color: #000000;
@@ -307,11 +329,21 @@ margin: 0px;
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .landing-title {
-        font-size: clamp(2rem, 6vw, 3rem); /* Ensures readability */
+        font-size: clamp(3rem, 6vw, 3rem); /* Ensures readability */
     }
 
     .landing-description {
         font-size: clamp(0.9rem, 4vw, 1.2rem);
+    }
+
+    .section-with-background {
+        padding: 3rem 0; 
+    }
+}
+
+@media (max-width: 425px) {
+    .section-with-background {
+        padding: 4rem 0; 
     }
 }
 
@@ -348,8 +380,9 @@ margin: 0px;
     }
 }
 
+/* Ensure animation starts with invisible text */
 .landing-section-title,
 .landing-section-description {
-    opacity: 0; /* Ensure animation starts with invisible text */
+    opacity: 0;
 }
 </style>
