@@ -18,8 +18,8 @@ const handleScroll = () => {
     hasScrolled = true;
 
     // Animate top column elements
-    animate(topTitle.value, { y: [150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
-    animate(topDescription.value, { y: [150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+    animate(topTitle.value, { x: [150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.3, duration: 0.8 });
+    animate(topDescription.value, { x: [150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.4, duration: 0.8 });
 
     window.removeEventListener("scroll", handleScroll); // Remove event listener after animation
   }
@@ -29,8 +29,8 @@ const observerCallback = (entries, observer) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       if (entry.target === bottomTitle.value) {
-        animate(bottomTitle.value, { y: [-150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
-        animate(bottomDescription.value, { y: [-150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+        animate(bottomTitle.value, { x: [-150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.4, duration: 0.8 });
+        animate(bottomDescription.value, { x: [-150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
         observer.unobserve(entry.target); // Stop observing after animation runs once
       }
     }
@@ -67,7 +67,7 @@ const refreshPage = (event) => {
             <!-- Header -->
             <header class="header">
                 <div class="header-content">
-                    <NuxtLink to="/" class="text-base font-bold text-[#D8D8D8] hover:text-[#B0B0B0]" @click.native="refreshPage">TW</NuxtLink>
+                    <NuxtLink to="/" class="text-base font-bold text-[#D8D8D8] hover:text-[#B0B0B0]" @click.native="refreshPage">TragSync</NuxtLink>
                     <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
                         <svg class="w-5 h-5 hover:fill-[#737373]" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -79,7 +79,7 @@ const refreshPage = (event) => {
 
             <!-- Landing Section -->
             <div class="landing-content">
-                <h1 class="landing-title animate-text">Finally, a way to monitor <br> my pellet smoker on the web</h1>
+                <h1 class="landing-title animate-text">TragSync, a way to monitor <br> your pellet smoker on the web</h1>
                 <p class="landing-description animate-text">
                     Your favorite pellet smoker company doesn’t have an official web solution to
                     <br> monitor your grill, so I made one myself.
@@ -101,8 +101,8 @@ const refreshPage = (event) => {
             <section class="section-with-background">
                 <div class="flex-col">
                     <!-- Top Column -->
-                    <div class="flex-col justify-end items-start text-right">
-                        <h2 class="landing-section-title mb-[1rem]" ref="topTitle">Smart Grilling<br>Brought To The Web</h2>
+                    <div class="flex-col justify-end items-start text-right overflow-hidden">
+                        <h2 class="landing-section-title mb-[0.75rem]" ref="topTitle">Smart Grilling<br>Brought To The Web</h2>
                         <!-- <p ref="rightDescription"class="landing-section-description"> -->
                         <p class="landing-section-description" ref="topDescription">
                             View your pellet smoker in real-time from your phone, tablet,<br>
@@ -111,12 +111,13 @@ const refreshPage = (event) => {
                     </div>
                 
                     <!-- Middle Demo Image -->
-                    <img src="../assets/traeger_web-ui-app.png" alt="grill app demo" class="w-full rounded-[20px] mt-[1.5rem] mb-[1.5rem]">
+                    <img src="../assets/traeger_web-ui-app.png" alt="grill app demo" class="w-full rounded-[20px] mt-[1.75rem] mb-[1.75rem]">
+                    <!-- <img src="../assets/traeger_web-ui-app.png" alt="grill app demo" class="w-full rounded-[20px] mt-[1.75rem] mb-[1.75rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] "> -->
                 
                     <!-- Bottom Column -->
-                    <div class="flex-col justify-end items-end text-left">
+                    <div class="flex-col justify-end items-end text-left overflow-hidden">
                         <!-- <h2 ref="leftTitle" class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2> -->
-                        <h2 class="landing-section-title mb-[1rem]" ref="bottomTitle">Check On Your Grill From<br>Anytime, Anywhere</h2>
+                        <h2 class="landing-section-title mb-[0.75rem]" ref="bottomTitle">Check On Your Grill From<br>Anytime, Anywhere</h2>
                         <!-- <p ref="leftDescription" class="landing-section-description"> -->
                         <p class="landing-section-description" ref="bottomDescription">
                             With this custom web interface you can grill like a<br>pro, even when you’re away from the smoker.
@@ -275,6 +276,7 @@ html {
     position: relative;
     /* overflow: hidden; /* Hide any overflow caused by the rotated background */
     margin-top: 8rem;
+    padding: 1rem;
 }
 
 /* Rotated background using a pseudo-element */
@@ -287,7 +289,7 @@ html {
     top: 0;
     transform: translateX(-50%) rotate(-8deg); /* Center and rotate */
     z-index: -1; /* Place it behind the content */
-    background: rgba(255, 255, 255, 0.75); 
+    background: rgba(255, 255, 255, 0.8); 
 }
 
 .landing-section-title {
@@ -300,13 +302,14 @@ html {
 }
 
 .landing-section-description {
-    font-size: clamp(0.75rem, 1vw, 15px); /* Scales between 2.5rem and 5rem */
-    font-weight: 900;
+    font-size: clamp(0.75rem, 1vw, 20px); /* Scales between 2.5rem and 5rem */
+    font-weight: 700;
     /* text-align: center; */
     color: #000000;
     opacity: 0.5;
     /* margin-top: 10rem; */
     width: 100%;
+    line-height: 2rem;
 }
 
 
@@ -338,6 +341,10 @@ html {
 
     .section-with-background {
         padding: 3rem 0; 
+    }
+
+    .landing-section-description {
+        line-height: 1.5rem;
     }
 }
 
