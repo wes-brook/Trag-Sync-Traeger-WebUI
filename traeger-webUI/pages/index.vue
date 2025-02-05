@@ -1,4 +1,37 @@
 <script setup>
+import { animate, spring} from "motion";
+import { ref, onMounted } from 'vue';
+
+const leftTitle = ref(null);
+const leftDescription = ref(null);
+const rightTitle = ref(null);
+const rightDescription = ref(null);
+let hasAnimated = false;
+
+const handleScroll = () => {
+  if (!hasAnimated && window.scrollY > 50) { // start landing-section-divider animation on first downward scroll
+    hasAnimated = true;
+
+    // Animate left column elements
+    animate(leftTitle.value, { x: [150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
+    animate(leftDescription.value, { x: [150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+
+    // Animate right column elements
+    animate(rightTitle.value, { x: [-150, 0], opacity: [0, 1] }, { type: spring, bounce: 0.5, duration: 0.8 });
+    animate(rightDescription.value, { x: [-150, 0], opacity: [0, 0.5] }, { type: spring, bounce: 0.3, duration: 0.8 });
+
+    window.removeEventListener("scroll", handleScroll); // Remove event listener after animation
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
 const refreshPage = (event) => {
     event.preventDefault(); 
     window.location.reload(); 
@@ -51,10 +84,10 @@ const refreshPage = (event) => {
             <div class="flex items-center justify-evenly">
                 <!-- Left Column -->
                 <div class="flex flex-col justify-end items-end text-right mt-[18rem]">
-                    <p class="landing-section-description">
+                    <p ref="leftDescription" class="landing-section-description">
                         With this custom web interface you can grill<br>like a pro, even when you’re away from the smoker.
                     </p>
-                    <h2 class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2>
+                    <h2 ref="leftTitle" class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2>
                 </div>
             
                 <!-- Center Image -->
@@ -66,8 +99,8 @@ const refreshPage = (event) => {
             
                 <!-- Right Column -->
                 <div class="flex flex-col justify-end items-start text-left mb-[18rem]">
-                    <h2 class="landing-section-title">Smart Grilling<br>Brought To The Web</h2>
-                    <p class="landing-section-description">
+                    <h2 ref="rightTitle" class="landing-section-title">Smart Grilling<br>Brought To The Web</h2>
+                    <p ref="rightDescription" class="landing-section-description">
                         View your pellet smoker in real-time from your phone,<br>tablet, or computer. Track your cook—all from the<br>convenience of your web browser.
                     </p>
                 </div>
@@ -313,5 +346,10 @@ margin: 0px;
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.landing-section-title,
+.landing-section-description {
+    opacity: 0; /* Ensure animation starts with invisible text */
 }
 </style>
