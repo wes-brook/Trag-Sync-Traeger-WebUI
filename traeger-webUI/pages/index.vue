@@ -102,12 +102,12 @@ const refreshPage = (event) => {
                 <div class="flex-col">
                     <!-- Top Column -->
                     <div class="flex-col justify-end items-start text-right overflow-hidden">
-                        <h2 class="landing-section-title mb-[0.75rem]" ref="topTitle">Smart Grilling<br>Brought To The Web</h2>
                         <!-- <p ref="rightDescription"class="landing-section-description"> -->
-                        <p class="landing-section-description" ref="topDescription">
-                            View your pellet smoker in real-time from your phone, tablet,<br>
-                            or computer. Track your cook—all from the convenience of your web browser.
+                        <p class="landing-section-description mt-[3.7rem]" ref="topDescription">
+                            View your pellet smoker in real-time from your phone,<br>
+                            tablet, or computer. Track your cook from your web browser.
                         </p>
+                        <h2 class="landing-section-title mt-[0.75rem]" ref="topTitle">Sync Your Grill, Master The Flame</h2>
                     </div>
                 
                     <!-- Middle Demo Image -->
@@ -117,10 +117,11 @@ const refreshPage = (event) => {
                     <!-- Bottom Column -->
                     <div class="flex-col justify-end items-end text-left overflow-hidden">
                         <!-- <h2 ref="leftTitle" class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2> -->
-                        <h2 class="landing-section-title mb-[0.75rem]" ref="bottomTitle">Check On Your Grill From<br>Anytime, Anywhere</h2>
+                        <h2 class="landing-section-title mb-[0.75rem]" ref="bottomTitle">Check Your Grill Anytime, Anywhere</h2>
                         <!-- <p ref="leftDescription" class="landing-section-description"> -->
-                        <p class="landing-section-description" ref="bottomDescription">
-                            With this custom web interface you can grill like a<br>pro, even when you’re away from the smoker.
+                        <p class="landing-section-description mb-[3.7rem]" ref="bottomDescription">
+                            With this custom web interface you can grill like a pro, even<br>
+                            when you’re away from the smoker.
                         </p>
                     </div>
                 </div>
@@ -275,8 +276,9 @@ html {
 .section-with-background {
     position: relative;
     /* overflow: hidden; /* Hide any overflow caused by the rotated background */
-    margin-top: 8rem;
-    padding: 1rem;
+    margin-top: 7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 /* Rotated background using a pseudo-element */
@@ -293,7 +295,7 @@ html {
 }
 
 .landing-section-title {
-    font-size: clamp(1.9rem, 2.2vw, 40px); /* Scales between 2.5rem and 5rem */
+    font-size: clamp(1.3rem, 3vw, 40px); /* Scales between 2.5rem and 5rem */
     font-weight: 900;
     /* text-align: center; */
     color: #000000;
@@ -302,7 +304,7 @@ html {
 }
 
 .landing-section-description {
-    font-size: clamp(0.75rem, 1vw, 20px); /* Scales between 2.5rem and 5rem */
+    font-size: clamp(0.75rem, 1.5vw, 20px); /* Scales between 2.5rem and 5rem */
     font-weight: 700;
     /* text-align: center; */
     color: #000000;
@@ -340,7 +342,7 @@ html {
     }
 
     .section-with-background {
-        padding: 3rem 0; 
+        /* padding: 3rem 0;  */
     }
 
     .landing-section-description {
