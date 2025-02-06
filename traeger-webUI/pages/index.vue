@@ -1,6 +1,8 @@
 <script setup>
 import { animate, spring} from "motion";
 import { ref, onMounted, onUnmounted } from 'vue';
+import GithubButton from '~/components/GithubButton.vue';
+import LinkedInButton from '~/components/LinkedInButton.vue';
 
 // Landing content animations
 // TODO
@@ -68,12 +70,7 @@ const refreshPage = (event) => {
             <header class="header">
                 <div class="header-content">
                     <NuxtLink to="/" class="text-base font-bold text-[#D8D8D8] hover:text-[#B0B0B0]" @click.native="refreshPage">TragSync</NuxtLink>
-                    <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
-                        <svg class="w-5 h-5 hover:fill-[#737373]" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M12 .296c-6.63 0-12 5.372-12 12 0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.165c-3.338.724-4.033-1.416-4.033-1.416-.547-1.39-1.335-1.758-1.335-1.758-1.091-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.495.996.108-.775.418-1.305.762-1.605-2.665-.302-5.466-1.332-5.466-5.93 0-1.31.469-2.383 1.235-3.222-.123-.303-.535-1.52.116-3.163 0 0 1.008-.322 3.3 1.23a11.61 11.61 0 013.005-.404c1.02.005 2.047.138 3.005.404 2.291-1.552 3.3-1.23 3.3-1.23.653 1.643.24 2.86.117 3.163.77.839 1.234 1.912 1.234 3.222 0 4.61-2.807 5.625-5.479 5.922.43.372.823 1.104.823 2.226v3.293c0 .32.192.693.8.577C20.565 22.094 24 17.598 24 12.296c0-6.628-5.373-12-12-12z" />
-                        </svg>
-                    </a>
+                    <GithubButton />
                 </div>
             </header>
 
@@ -88,43 +85,39 @@ const refreshPage = (event) => {
                     <NuxtLink to="/grill" class="get-started-button">
                         <span class="button-text">Get Started</span>
                     </NuxtLink>
-                    <a href="https://github.com/wes-brook/Traeger-WebUI/tree/main" target="_blank" rel="noopener noreferrer">
-                        <svg class="w-11 h-11 hover:fill-[#B0B0B0]" fill="#D8D8D8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M12 .296c-6.63 0-12 5.372-12 12 0 5.303 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.165c-3.338.724-4.033-1.416-4.033-1.416-.547-1.39-1.335-1.758-1.335-1.758-1.091-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.495.996.108-.775.418-1.305.762-1.605-2.665-.302-5.466-1.332-5.466-5.93 0-1.31.469-2.383 1.235-3.222-.123-.303-.535-1.52.116-3.163 0 0 1.008-.322 3.3 1.23a11.61 11.61 0 013.005-.404c1.02.005 2.047.138 3.005.404 2.291-1.552 3.3-1.23 3.3-1.23.653 1.643.24 2.86.117 3.163.77.839 1.234 1.912 1.234 3.222 0 4.61-2.807 5.625-5.479 5.922.43.372.823 1.104.823 2.226v3.293c0 .32.192.693.8.577C20.565 22.094 24 17.598 24 12.296c0-6.628-5.373-12-12-12z" />
-                        </svg>
-                    </a>
+                    <GithubButton width="45" height="45"/>
                 </div>
             </div>
             
             <!-- Section Divider -->
-            <section class="section-with-background">
+            <section class="section-with-background-white">
                 <div class="flex-col">
                     <!-- Top Column -->
                     <div class="flex-col justify-end items-start text-right overflow-hidden">
-                        <!-- <p ref="rightDescription"class="landing-section-description"> -->
                         <p class="landing-section-description mt-[3.7rem]" ref="topDescription">
                             View your pellet smoker in real-time from your phone,<br>
                             tablet, or computer. Track your cook from your web browser.
                         </p>
                         <h2 class="landing-section-title mt-[0.75rem]" ref="topTitle">Sync Your Grill, Master The Flame</h2>
                     </div>
-                
+
                     <!-- Middle Demo Image -->
                     <img src="../assets/traeger_web-ui-app.png" alt="grill app demo" class="w-full rounded-[20px] mt-[1.75rem] mb-[1.75rem]">
-                    <!-- <img src="../assets/traeger_web-ui-app.png" alt="grill app demo" class="w-full rounded-[20px] mt-[1.75rem] mb-[1.75rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] "> -->
                 
                     <!-- Bottom Column -->
                     <div class="flex-col justify-end items-end text-left overflow-hidden">
-                        <!-- <h2 ref="leftTitle" class="landing-section-title">Monitor Your Grill<br>Anytime, Anywhere</h2> -->
-                        <h2 class="landing-section-title mb-[0.75rem]" ref="bottomTitle">Check Your Grill Anytime, Anywhere</h2>
-                        <!-- <p ref="leftDescription" class="landing-section-description"> -->
+                        <h2 class="landing-section-title mb-[0.75rem]" ref="bottomTitle">Check Your Smoker Anytime, Anywhere</h2>
                         <p class="landing-section-description mb-[3.7rem]" ref="bottomDescription">
                             With this custom web interface you can grill like a pro, even<br>
                             when you’re away from the smoker.
                         </p>
                     </div>
                 </div>
+            </section>
+
+            <!-- Get Started Section -->
+            <section class="section-with-background-neutral">
+
             </section>
         </div>
 
@@ -133,7 +126,9 @@ const refreshPage = (event) => {
         
         <!-- Footer -->
         <footer class="footer">
-            <p class="footer-text">© Wesly Barayuga | MIT License</p>
+            <p class="footer-text">TragSync is a free and open source web application created and maintained by Wesly Barayuga</p>
+            <GithubButton class="ml-[2px]" width="28" height="28"/>
+            <LinkedInButton class="pt-[2px]" width="35px" height="35px" link="https://www.linkedin.com/in/wesly-barayuga/"/>
         </footer>
     </div>
 </template>
@@ -273,7 +268,7 @@ html {
 }
 
 /* Container for the section with the rotated background */
-.section-with-background {
+.section-with-background-white {
     position: relative;
     /* overflow: hidden; /* Hide any overflow caused by the rotated background */
     margin-top: 7rem;
@@ -282,7 +277,7 @@ html {
 }
 
 /* Rotated background using a pseudo-element */
-.section-with-background::before {
+.section-with-background-white::before {
     content: '';
     position: absolute;
     width: 150vw; /* Wider than the viewport to account for rotation */
@@ -317,17 +312,22 @@ html {
 
 /* Footer */
 .footer {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     width: 100%;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.25);
-    opacity: 0.5;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    opacity: 0.75;
     text-align: center;
     margin-top: auto;
 }
 
 .footer-text {
     font-size: 1rem;
-    color: #000000;
+    color: #f5f5f5;
     opacity: 0.6;
 }
 
@@ -341,17 +341,19 @@ html {
         font-size: clamp(0.9rem, 4vw, 1.2rem);
     }
 
-    .section-with-background {
+    .section-with-background-white {
         /* padding: 3rem 0;  */
     }
 
     .landing-section-description {
         line-height: 1.5rem;
     }
+
+    /* Handle footer text resizing and maybe buttons tool? */
 }
 
 @media (max-width: 425px) {
-    .section-with-background {
+    .section-with-background-white {
         padding: 4rem 0; 
     }
 }
