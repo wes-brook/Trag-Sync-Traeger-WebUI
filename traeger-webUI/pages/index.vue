@@ -79,7 +79,7 @@ const refreshPage = (event) => {
                 <h1 class="landing-title animate-text">TragSync, a way to monitor <br> your pellet smoker on the web</h1>
                 <p class="landing-description animate-text">
                     Your favorite pellet smoker company doesn’t have an official web solution to
-                    <br> monitor your grill, so I made one myself.
+                    <br> monitor your grill, so I made one myself. Free & open source.
                 </p>
                 <div class="flex items-center justify-center animate-text">
                     <NuxtLink to="/grill" class="get-started-button">
@@ -158,7 +158,7 @@ html {
     width: 100%;
     height: 100%; /* Ensure it covers the full height */
     /* background: linear-gradient(90deg, #535353 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */
-    background: linear-gradient(90deg, #3e3e3e 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
+    background: linear-gradient(90deg, #1a1a1a 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
     z-index: -1;
     top: 0;
     left: 0;
@@ -201,26 +201,26 @@ html {
 .landing-content {
     width: 100%;
     max-width: 1200px;
-    margin: 0px auto;
-    padding: 20px;
+    margin: 14rem auto;
+    /* padding: 50px 0; */
+    /* padding-bottom: 20px; */
 }
 
 .landing-content .flex {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px; /* Reduce the gap */
-    margin-top: 1.5rem; /* Adjust spacing */
+    gap: 12px; 
+    margin-top: 1.5rem; 
 }
 
 .landing-title {
-    font-size: clamp(2rem, 6vw, 4.5rem); /* Scales between 2.5rem and 5rem */
+    font-size: clamp(2rem, 5vw, 76px); /* Scales between 2.5rem and 5rem */
     line-height: 1.4;
     font-weight: 900;
     text-align: center;
     color: #000000;
     /* opacity: 0.9; */
-    margin-top: 10rem;
     width: 100%;
     overflow: hidden;
 }

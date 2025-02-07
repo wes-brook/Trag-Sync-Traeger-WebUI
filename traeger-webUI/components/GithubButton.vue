@@ -4,7 +4,7 @@
             :class="`hover:fill-[#B0B0B0]`" 
             :width="width" 
             :height="height" 
-            fill="#D8D8D8" 
+            fill="rgba(44, 44, 44, 0.65)" 
             viewBox="0 0 24 24" 
             xmlns="http://www.w3.org/2000/svg"
         >
