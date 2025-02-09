@@ -3,6 +3,9 @@ import { animate, spring} from "motion";
 import { ref, onMounted, onUnmounted } from 'vue';
 import GithubButton from '~/components/GithubButton.vue';
 import LinkedInButton from '~/components/LinkedInButton.vue';
+import Navbar from '~/components/Navbar.vue';
+import Hero from '~/components/Hero.vue';
+import About from '~/components/About.vue';
 
 // Landing content animations
 // TODO
@@ -53,10 +56,6 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 
-const refreshPage = (event) => {
-    event.preventDefault(); 
-    window.location.reload(); 
-};
 </script>
 
 <template>
@@ -66,20 +65,15 @@ const refreshPage = (event) => {
 
         <!-- Container for constrained content -->
         <div class="container">
-            <!-- Header -->
-            <header class="header">
-                <div class="header-content">
-                    <NuxtLink to="/" class="text-base font-bold text-[#D8D8D8] hover:text-[#B0B0B0]" @click.native="refreshPage">TragSync</NuxtLink>
-                    <GithubButton />
-                </div>
-            </header>
+            <!-- Navigation Bar -->
+            <Navbar />
 
             <!-- Landing Section -->
             <div class="landing-content">
                 <h1 class="landing-title animate-text">TragSync, a way to monitor <br> your pellet smoker on the web</h1>
                 <p class="landing-description animate-text">
-                    Your favorite pellet smoker company doesn’t have an official web solution to
-                    <br> monitor your grill, so I made one myself. Free & open source.
+                    Our favorite pellet smoker company didn't make an official web solution to let us
+                    <br> monitor our grills, so I made one myself. Free & open source.
                 </p>
                 <div class="flex items-center justify-center animate-text">
                     <NuxtLink to="/grill" class="get-started-button">
@@ -102,7 +96,10 @@ const refreshPage = (event) => {
                     </div>
 
                     <!-- Middle Demo Image -->
-                    <img src="../assets/traeger_web-ui-app.png" alt="grill app demo" class="w-full rounded-[20px] mt-[1.75rem] mb-[1.75rem]">
+                    <img src="../assets/traeger_web-ui-app.png" 
+                         alt="grill app demo" 
+                         class="w-full rounded-[20px] mt-[1.75rem] mb-[1.75rem] shadow-[8px_8px_30px_rgb(0,0,0,0.4)]"
+                    >
                 
                     <!-- Bottom Column -->
                     <div class="flex-col justify-end items-end text-left overflow-hidden">
@@ -115,9 +112,9 @@ const refreshPage = (event) => {
                 </div>
             </section>
 
-            <!-- Get Started Section -->
-            <section class="section-with-background-neutral">
-
+            <!-- About Section -->
+            <section class="section-about">
+                <About />
             </section>
         </div>
 
@@ -158,7 +155,7 @@ html {
     width: 100%;
     height: 100%; /* Ensure it covers the full height */
     /* background: linear-gradient(90deg, #535353 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */
-    background: linear-gradient(90deg, #1a1a1a 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
+    background: linear-gradient(90deg, #000000 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
     z-index: -1;
     top: 0;
     left: 0;
@@ -171,37 +168,11 @@ html {
     margin: 0 auto; /* Centers the content */
 }
 
-/* Header */
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 0;
-    background: rgba(0, 0, 0, 0.15); /* Semi-transparent white background */
-    
-    color: #F5F5F5;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    /* box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2); Soft shadow */
-}
-
-.header-content {
-    width: 80%; /* Keep the width constrained */
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* padding: 0 2rem;  */
-}
-
 /* Landing Section */
 .landing-content {
     width: 100%;
     max-width: 1200px;
-    margin: 14rem auto;
+    margin: 15rem auto;
     /* padding: 50px 0; */
     /* padding-bottom: 20px; */
 }
@@ -226,11 +197,11 @@ html {
 }
 
 .landing-description {
-    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Adjusts between 1rem and 1.5rem */
+    font-size: clamp(0.5rem, 2.5vw, 1.5rem); /* Adjusts between 1rem and 1.5rem */
     font-weight: 400;
     text-align: center;
     color: #00000094;
-    opacity: 0.85;
+    opacity: 0.9;
     margin-top: 1rem;
     width: 100%;
 }
@@ -286,7 +257,8 @@ html {
     top: 0;
     transform: translateX(-50%) rotate(-8deg); /* Center and rotate */
     z-index: -1; /* Place it behind the content */
-    background: rgba(255, 255, 255, 0.8); 
+    /* background: rgba(255, 255, 255, 0.8);  */
+    background: rgba(255, 255, 255, 0.4); 
 }
 
 .landing-section-title {
@@ -303,7 +275,7 @@ html {
     font-weight: 700;
     /* text-align: center; */
     color: #000000;
-    opacity: 0.5;
+    opacity: 0.75;
     /* margin-top: 10rem; */
     width: 100%;
     line-height: 2rem;
@@ -331,14 +303,14 @@ html {
     opacity: 0.6;
 }
 
-/* Media Queries for Responsiveness */
+/* TABLET VIEW */
 @media (max-width: 768px) {
     .landing-title {
-        font-size: clamp(3rem, 6vw, 3rem); /* Ensures readability */
+        font-size: clamp(1rem, 5vw, 40px);
     }
 
     .landing-description {
-        font-size: clamp(0.9rem, 4vw, 1.2rem);
+        font-size: clamp(0.5rem, 2vw, 20px); 
     }
 
     .section-with-background-white {
@@ -354,7 +326,11 @@ html {
 
 @media (max-width: 425px) {
     .section-with-background-white {
-        padding: 4rem 0; 
+        /* padding: 4rem 0;  */
+    }
+
+    .landing-description {
+        font-size: clamp(0.4rem, 2vw, 20px); 
     }
 }
 
@@ -395,5 +371,9 @@ html {
 .landing-section-title,
 .landing-section-description {
     opacity: 0;
+}
+
+.section-about {
+    margin-top: 20rem;
 }
 </style>
