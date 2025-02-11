@@ -254,7 +254,7 @@ import '../assets/styles.css';
                             <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560e03-b4ef2fa0" class="home-hero-vid">
                                 <div class="hero-vid-bg"></div>
                                 <div class="hero-vid-wrap">
-                                    <img src="../assets/grillCard.JPG"/>
+                                    <img src="../assets/grillCard.png"/>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 220 220" fill="none"
                                     class="home-vid-star">
