@@ -5880,7 +5880,8 @@ img {
 }
 .rock-wrap-overlay {
   z-index: 2;
-  background-image: linear-gradient(#00000080 50%, #000 100%, #000);
+  background-image: linear-gradient(to top, #000 0%, #00000080 50%, transparent 100%);
+  /* background-image: linear-gradient(#00000080 50%, #000 100%, #000); */
   position: absolute;
   inset: 0%;
 }
@@ -7065,14 +7066,23 @@ img {
   right: 0;
 }
 .bg__unicorn-dark-overlay-top {
-    pointer-events: none;
-    background-image: linear-gradient(#000, #0000);
-    height: 20%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
+  pointer-events: none;
+  background-image: linear-gradient(#000, #0000);
+  height: 80%; /* this set to 80 is lowkey bussin fam */
+  position: absolute;
+  top: 0; /* comment this out to put this below the hero */
+  left: 0;
+  right: 0;
+}
+.bg__unicorn-dark-overlay-below-hero {
+  pointer-events: none;
+  background-image: linear-gradient(#000, #0000);
+  height: 70%; /* this set to 80 is lowkey bussin fam */
+  position: absolute;
+  /* top: 0; */
+  left: 0;
+  right: 0;
+}
 .db-avatar__img {
   position: absolute;
 }

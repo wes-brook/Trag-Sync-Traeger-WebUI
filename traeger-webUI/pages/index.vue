@@ -65,7 +65,7 @@ import '../assets/styles.css';
                                     </p>
                                 </a>
                             </div>
-                            <a aria-label="get started" data-o-anonymous="1" data-nav-button="" href="/plans"
+                            <a aria-label="get started" data-o-anonymous="1" data-nav-button="" href="/Grill"
                                 class="button small w-inline-block">
                                 <div class="u--clip">
                                     <p data-letters-delay="" data-split="letters" class="p-reg">
@@ -78,80 +78,9 @@ import '../assets/styles.css';
                     </div>
                 </nav>
             </div>
-            <div class="header-bg"></div>
-            <div class="menu-bg"></div>
+            <!-- <div class="header-bg"></div>
+            <div class="menu-bg"></div> -->
         </header>
-        <!-- <div class="modal-wrap">
-            <div data-modal-close="" class="modal-bg bg"></div>
-            <div class="sidebar">
-                <div class="sidebar-button">
-                    <a aria-label="close button" data-modal-close="" href="#" class="square-button w-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 15 14" fill="none"
-                            class="close-icon">
-                            <path
-                                d="M7.02441 0.2C7.02441 0.0895426 7.11396 0 7.22441 0H8.57441C8.68487 0 8.77441 0.0895431 8.77441 0.2V13.8C8.77441 13.9105 8.68487 14 8.57441 14H7.22441C7.11396 14 7.02441 13.9105 7.02441 13.8V0.2Z"
-                                fill="currentColor"></path>
-                            <path
-                                d="M14.6994 6.125C14.8099 6.125 14.8994 6.21454 14.8994 6.325V7.675C14.8994 7.78546 14.8099 7.875 14.6994 7.875L1.09941 7.875C0.988957 7.875 0.899414 7.78546 0.899414 7.675L0.899414 6.325C0.899414 6.21454 0.988957 6.125 1.09941 6.125L14.6994 6.125Z"
-                                fill="currentColor"></path>
-                            <path d="M8.77441 4.375V6.125H10.5244C9.55798 6.125 8.77441 5.34143 8.77441 4.375Z"
-                                fill="currentColor"></path>
-                            <path d="M8.77441 9.625V7.875H10.5244C9.55798 7.875 8.77441 8.65857 8.77441 9.625Z"
-                                fill="currentColor"></path>
-                            <path d="M7.02441 4.375V6.125H5.27441C6.24084 6.125 7.02441 5.34143 7.02441 4.375Z"
-                                fill="currentColor"></path>
-                            <path d="M7.02441 9.625V7.875H5.27441C6.24084 7.875 7.02441 8.65857 7.02441 9.625Z"
-                                fill="currentColor"></path>
-                        </svg>
-                        <div class="button-bg black"></div>
-                    </a>
-                </div>
-
-            </div>
-        </div> -->
-        <!-- <div class="video-wrap">
-            <div data-video-close="" class="modal-bg bg dark"></div>
-            <div class="video-player__wrap">
-                <div class="video-player">
-                    <div data-vimeo-status-hover="false" data-vimeo-player-target="" data-vimeo-player-autoplay="false"
-                        data-vimeo-status-activated="false" data-vimeo-status-paused-by-user="false"
-                        data-vimeo-status-play="false" data-vimeo-status-muted="false" class="single-vimeo-player">
-                        <div class="w-embed w-iframe">
-                            <iframe
-                                src="https://player.vimeo.com/video/1019191082?api=1&background=1&autoplay=0&loop=0&muted=0"
-                                width="640" height="360" frameborder="0" allowfullscreen
-                                allow="autoplay; encrypted-media"></iframe>
-                            <div class="overlay vimeo-overlay-dark"></div>
-                            <div class="overlay vimeo-overlay-interface">
-                                <div class="vimeo-duration">
-                                    <span class="time duration"></span>
-                                </div>
-                                <div class="vimeo-timeline">
-                                    <input type="range" min="0" value="0" step="0.01" max="120"
-                                        data-vimeo-control="timeline" />
-                                    <progress min="0" value="0" max="120"></progress>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="vimeo-overlay-dark"></div>
-                        <div data-vimeo-control="play" class="overlay vimeo-overlay-play">
-                            <div class="icon">
-                                <img loading="lazy"
-                                    src="https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/670d128330cb870c167258c4_icon-play.svg"
-                                    alt="" />
-                            </div>
-                        </div>
-                        <div data-vimeo-control="pause" class="overlay vimeo-overlay-pause">
-                            <div class="icon">
-                                <img loading="lazy"
-                                    src="https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/670d128330cb870c167258f7_icon-pause.svg"
-                                    alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div data-barba-namespace="home" data-barba="container" class="main-w">
             <section data-hero-section="" class="section u--rel z--2">
                 <div class="bg__unicorn-dark-overlay"></div> <!-- This is what adds the bottom dark shadow on the hero -->
@@ -190,8 +119,12 @@ import '../assets/styles.css';
                                         <p>Free To Use</p>
                                     </div>
                                     <div class="p-reg mask">
-                                        <p>Open Source</p>
+                                        <a href="https://github.com/wes-brook/Trag-Sync-Traeger-WebUI" target="_blank" rel="noopener"
+                                            class="link opacity-100">Open Source <</a>
                                     </div>
+                                    <!-- <div class="p-reg mask">
+                                        <p>Open Source</p>
+                                    </div> -->
                                     <div class="p-reg mask">
                                         <p>Any Browser</p>
                                     </div>
@@ -201,9 +134,6 @@ import '../assets/styles.css';
                                 </div>
                             </div>
                             <div class="hero-col-title">
-                                <h1 class="h-display sr-only">
-                                    TragSync —Track<br>your smoker online.
-                                </h1>
                                 <h1 aria-hidden="true" data-split="lines" data-reveal="load" class="h-display">
                                     TragSync —Track<br>your smoker online.
                                 </h1>
@@ -235,18 +165,11 @@ import '../assets/styles.css';
                             <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560dfe-b4ef2fa0" class="md--hide"></div>
                             <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560dff-b4ef2fa0" class="home-col-cta">
                                 <div class="hero-p__wrap">
-                                    <p class="p-reg sr-only">
-                                        Never lose track of your grill again. TragSync is a free, open-source 
-                                        web application that lets you monitor your grill’s temperature and status 
-                                        in real time—right from your web browser. Whether you’re smoking brisket 
-                                        or grilling burgers, stay in control with live updates and peace of mind. 
-                                        Created by a solo web developer who happens to love smoking briskets.
-                                    </p>
                                     <p aria-hidden="true" data-split="lines" data-reveal="load" class="p-reg">
-                                        Never lose track of your grill again. TragSync is a free, open-source 
+                                        Never lose track of your pellet smoker again. TragSync is a free, open-source 
                                         web application that lets you monitor your grill’s temperature and status 
                                         in real time—right from your web browser. Whether you’re smoking brisket 
-                                        or grilling burgers, stay in control with live updates and peace of mind. 
+                                        or BBQ ribs, stay in control with live updates and peace of mind. 
                                         Created by a solo web developer who happens to love smoking briskets.
                                     </p>
                                 </div>
@@ -254,7 +177,7 @@ import '../assets/styles.css';
                             <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560e03-b4ef2fa0" class="home-hero-vid">
                                 <div class="hero-vid-bg"></div>
                                 <div class="hero-vid-wrap">
-                                    <img src="../assets/grillCard.JPG"/>
+                                    <img src="../assets/grillCard.png"/>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 220 220" fill="none"
                                     class="home-vid-star">
@@ -269,10 +192,12 @@ import '../assets/styles.css';
                         </div>
                     </div>
                 </div>
+                <div class="bg__unicorn-dark-overlay-top"></div>
+                <!-- <div class="bg__unicorn-dark-overlay-top"></div> --> <!-- uncomment this for a stronger gradient -->
             </section>
             <section id="dashboard" class="section">
+                <div class="bg__unicorn-dark-overlay-below-hero"></div>
                 <div class="container c-pad-top">
-                    <div class="bg__unicorn-dark-overlay-top"></div>
                     <div class="spacer md--hide"></div>
                     <div class="text-container text-center">
                         <div class="container-small">
@@ -603,7 +528,8 @@ import '../assets/styles.css';
 
 <style scoped>
 .body {
-    background: linear-gradient(90deg, #000000 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%);
+    background: linear-gradient(90deg, #000 0.01%, #5b5a5afc 65.5%, #fff);
+    /* background: linear-gradient(90deg, #000000 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */
 }
 
 /* ------------------------- Variables -------------------------------------------------- */
