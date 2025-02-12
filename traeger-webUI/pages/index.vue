@@ -1,22 +1,23 @@
 <script setup>
+import { useHead } from 'nuxt/app';
 import './styles.css';
-import '../assets/styles.css';
 
+useHead({
+  title: 'TragSync — Monitor your smoker on the web.',
+  meta: [
+    { charset: 'utf-8' },
+    { name: 'description', content: 'A platform by Wesly Barayuga to give people a way to monitor their pellet smokers on the web.' },
+    { property: 'og:title', content: 'TragSync — Monitor your pellet smoker on the web' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+  ],
+//   bodyAttrs: {
+//     class: 'custom-body'
+//   }
+});
 </script>
 
 <template>
-    <head>
-        <meta charset="utf-8" />
-        <title>TragSync — Monitor your smoker on the web.</title>
-        <meta
-            content="A platform by Wesly Barayuga to give people a way to monitor their pellet smokers on the web."
-            name="description" />
-        <meta content="TragSync — Monitor your pellet smoker on the web" property="og:title" />
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    </head>
-
-    <body data-barba="wrapper" data-scrolling-direction="" data-scrolling-started="false" data-nav-status="closed" class="body">
+    <div data-barba="wrapper" data-scrolling-direction="" data-scrolling-started="false" data-nav-status="closed" class="body">
         <header class="header">
             <div class="container no-pad">
                 <nav class="nav-row">
@@ -166,7 +167,7 @@ import '../assets/styles.css';
                             <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560dff-b4ef2fa0" class="home-col-cta">
                                 <div class="hero-p__wrap">
                                     <p aria-hidden="true" data-split="lines" data-reveal="load" class="p-reg">
-                                        Never lose track of your pellet smoker again. TragSync is a free, open-source 
+                                        Never lose track of your Traeger (not affiliated). TragSync is a free, open-source 
                                         web application that lets you monitor your grill’s temperature and status 
                                         in real time—right from your web browser. Whether you’re smoking brisket 
                                         or BBQ ribs, stay in control with live updates and peace of mind. 
@@ -243,7 +244,7 @@ import '../assets/styles.css';
                             <div class="container-small">
                                 <h3 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
                                     I created TragSync to monitor my 
-                                    pellet smoker on the web, and now you can too. —Wes
+                                    pellet smoker on the web so I don't have to pull out my phone. —Wes
                                 </h3>
                             </div>
                             <div class="divider testimonials"></div> <!-- This the line below the above html element -->
@@ -510,7 +511,7 @@ import '../assets/styles.css';
                                     </li>
                                 </ul>
                                 <p class="eyebrow">
-                                    a thing by
+                                    built by 
                                     <a href="" target="_blank" class="link">Wes Brook</a>
                                 </p>
                             </div>
@@ -523,10 +524,12 @@ import '../assets/styles.css';
                 </div>
             </footer>
         </div>
-    </body>
+    </div>
 </template>
 
 <style scoped>
+@import '../assets/styles.css';
+
 .body {
     background: linear-gradient(90deg, #000 0.01%, #5b5a5afc 65.5%, #fff);
     /* background: linear-gradient(90deg, #000000 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */

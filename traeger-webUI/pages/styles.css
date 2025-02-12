@@ -83,17 +83,17 @@ body {
 
 /* ------------------------- Hide Scrollbar -------------------------------------------------- */
 body ::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 /* Chrome, Safari, Opera */
 body {
-  -ms-overflow-style: none;
+  /* -ms-overflow-style: none; */
 }
 
 /* IE & Edge */
 html {
-  scrollbar-width: none;
+  /* scrollbar-width: none; */
 }
 
 /* Firefox */
