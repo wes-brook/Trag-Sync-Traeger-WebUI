@@ -1,6 +1,7 @@
 <script setup>
 import { useHead } from 'nuxt/app';
-import './styles.css';
+// import './styles.css';
+// import '../assets/styles.css';
 
 useHead({
   title: 'TragSync — Monitor your smoker on the web.',
@@ -527,13 +528,37 @@ useHead({
     </div>
 </template>
 
-<style scoped>
+<style>
+
+@import './styles.css';
 @import '../assets/styles.css';
 
 .body {
     background: linear-gradient(90deg, #000 0.01%, #5b5a5afc 65.5%, #fff);
     /* background: linear-gradient(90deg, #000000 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */
 }
+
+/* added 10:29am  */
+/* body {
+  margin: 0;
+}
+
+.body {
+  background-color: var(--color-black);
+  color: var(--color-neutral-200);
+  justify-content: center;
+  align-items: center;
+  font-family: PP Neue Montreal, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.body.is--dashboard {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+} */
+
+/* added 10:29am  */
 
 /* ------------------------- Variables -------------------------------------------------- */
 :root {
