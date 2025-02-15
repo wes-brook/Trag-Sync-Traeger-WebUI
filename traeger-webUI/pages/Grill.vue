@@ -13,7 +13,7 @@ import GrillCard from "~/components/GrillCard.vue";
   position: relative;
   width: 100vw; /* Full viewport width */
   height: 100vh; /* Full viewport height */
-  background: linear-gradient(90deg, #FFFFFF 0%, rgba(196, 113, 62, 0.99) 34.5%, #535353 99.99%);
+  background: linear-gradient(90deg, #FFFFFF 0%, rgba(196, 113, 62, 0.99) 34.5%, #1b1b1b 99.99%);
   display: flex;
   align-items: center;
   justify-content: center;
