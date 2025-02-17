@@ -1,7 +1,7 @@
 <script setup>
 import { useHead } from 'nuxt/app';
-// import './styles.css';
-// import '../assets/styles.css';
+// import './styles.css';         // moved to style section
+// import '../assets/styles.css'; // moved to style section
 
 useHead({
   title: 'TragSync — Monitor your smoker on the web.',
@@ -11,554 +11,500 @@ useHead({
     { property: 'og:title', content: 'TragSync — Monitor your pellet smoker on the web' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   ],
-//   bodyAttrs: {
-//     class: 'custom-body'
-//   }
 });
 </script>
 
 <template>
-    <div data-barba="wrapper" data-scrolling-direction="" data-scrolling-started="false" data-nav-status="closed" class="body">
-        <header class="header">
-            <div class="container no-pad">
-                <nav class="nav-row">
-                    <div class="nav-inner">
-                        <a href="/" data-nav-button="" aria-current="page" class="nav-logo-row w-inline-block w--current">
-                            <h3>TragSync</h3>
-                            <p class="p-reg opacity--70">*Not affiliated with Traeger</p>
-                        </a>
-                        <div class="nav-menu">
-                            <div data-menu-reveal="" class="nav-menu-eyebrow">
-                                <div class="eyebrow">menu</div>
-                            </div>
-                            <div class="nav-menu__links">
-                                <a href="/" aria-label="home" data-barba-update="" data-menu-reveal=""
-                                    aria-current="page" class="link nav-link w-inline-block w--current">
-                                    <p data-letters-delay="" data-split="letters" class="nav-link-text">
-                                        Home
-                                    </p>
-                                </a>
-                                <div data-menu-reveal="" class="u--rel">
-                                    <a href="/updates" aria-label="Updates" data-barba-update=""
-                                        class="link nav-link w-inline-block">
-                                        <p data-letters-delay="" data-split="letters" class="nav-link-text">
-                                            Updates
-                                        </p>
-                                        <div class="nav-menu-divider bottom"></div>
-                                    </a>
-                                    <div class="updates-count">
-                                        <p data-updates-nr="" class="eyebrow">1</p>
-                                    </div>
-                                </div>
-                                <a href="/faq" aria-label="FAQ" data-barba-update="" data-menu-reveal=""
-                                    class="link nav-link w-inline-block">
-                                    <p data-letters-delay="" data-split="letters" class="nav-link-text">
-                                        FAQ
-                                    </p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="nav-button-row">
-                            <div data-o-anonymous="1" data-nav-button="" class="login-wrap">
-                                <a aria-label="Log in" data-barba-prevent="" href=""
-                                    class="link u--clip w-inline-block">
-                                    <p data-letters-delay="" data-split="letters" class="p-reg">
-                                        Log in
-                                    </p>
-                                </a>
-                            </div>
-                            <a aria-label="get started" data-o-anonymous="1" data-nav-button="" href="/Grill"
-                                class="button small w-inline-block">
-                                <div class="u--clip">
-                                    <p data-letters-delay="" data-split="letters" class="p-reg">
-                                        Get Started
-                                    </p>
-                                </div>
-                                <div class="button-bg"></div>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
+  <div data-barba="wrapper" data-scrolling-direction="" data-scrolling-started="false" data-nav-status="closed"
+    class="body">
+    <!-- ****START HEADER**** -->
+    <header class="header">
+      <div class="container no-pad">
+        <nav class="nav-row"> <!-- NAVIGATION BAR -->
+          <div class="nav-inner">
+            <a href="/" data-nav-button="" aria-current="page" class="nav-logo-row w-inline-block w--current">
+              <h3>TragSync</h3>
+              <p class="p-reg opacity--70">*Not affiliated with Traeger</p>
+            </a>
+            <div class="nav-menu">
+              <div data-menu-reveal="" class="nav-menu-eyebrow">
+                <div class="eyebrow">menu</div>
+              </div>
+              <div class="nav-menu__links">
+                <a href="/" aria-label="home" data-barba-update="" data-menu-reveal="" aria-current="page"
+                  class="link nav-link w-inline-block w--current">
+                  <p data-letters-delay="" data-split="letters" class="nav-link-text">
+                    Home
+                  </p>
+                </a>
+                <div data-menu-reveal="" class="u--rel">
+                  <a href="/updates" aria-label="Updates" data-barba-update="" class="link nav-link w-inline-block">
+                    <p data-letters-delay="" data-split="letters" class="nav-link-text">
+                      Updates
+                    </p>
+                    <div class="nav-menu-divider bottom"></div>
+                  </a>
+                  <div class="updates-count">
+                    <p data-updates-nr="" class="eyebrow">1</p>
+                  </div>
+                </div>
+                <a href="/faq" aria-label="FAQ" data-barba-update="" data-menu-reveal=""
+                  class="link nav-link w-inline-block">
+                  <p data-letters-delay="" data-split="letters" class="nav-link-text">
+                    FAQ
+                  </p>
+                </a>
+              </div>
             </div>
-            <!-- <div class="header-bg"></div>
-            <div class="menu-bg"></div> -->
-        </header>
-        <div data-barba-namespace="home" data-barba="container" class="main-w">
-            <section data-hero-section="" class="section u--rel z--2">
-                <div class="bg__unicorn-dark-overlay"></div> <!-- This is what adds the bottom dark shadow on the hero -->
-                <div class="container">
-                    <div class="home-hero">
-                        <div class="home-hero__inner">
-                            <div data-load-items="wrap-p" class="hero-col-info">
-                                <div class="flex-col">
-                                    <div class="p-reg mask">
-                                        <p>Real Time View</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <p>Smoker Temp</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <p>Probe Temp</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <p>Clock</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <p>Timer</p>
-                                    </div>
-                                    <!-- <div class="p-reg mask">
-                                        <p>Transitions</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <p>Animations</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <p>Loaders</p>
-                                    </div> -->
-                                </div>
-                                <div class="flex-col">
-                                    <div class="p-reg mask">
-                                        <p>Free To Use</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <a href="https://github.com/wes-brook/Trag-Sync-Traeger-WebUI" target="_blank" rel="noopener"
-                                            class="link opacity-100">Open Source <</a>
-                                    </div>
-                                    <!-- <div class="p-reg mask">
-                                        <p>Open Source</p>
-                                    </div> -->
-                                    <div class="p-reg mask">
-                                        <p>Any Browser</p>
-                                    </div>
-                                    <div class="p-reg mask">
-                                        <p>WebPit</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hero-col-title">
-                                <h1 aria-hidden="true" data-split="lines" data-reveal="load" class="h-display">
-                                    TragSync —Track<br>your smoker online.
-                                </h1>
-                                <div data-load-items="wrap-buttons" class="flex-row gap--tiny">
-                                    <NuxtLink to="/Grill" class="button w-inline-block">
-                                        <div class="u--clip">
-                                            <p data-letters-delay="" data-split="letters" class="p-reg">
-                                                Get Started
-                                            </p>
-                                        </div>
-                                        <div class="button-bg"></div>
-                                    </NuxtLink>
-                                    <button data-modal-cta="founders" aria-label="about us"
-                                        class="button is--secondary">
-                                        <div class="button-inner-row">
-                                            <img loading="lazy"
-                                                src="../assets/me.png"
-                                                alt="Wes Brook" class="button-faces rounded-full" />
-                                            <div class="u--clip">
-                                                <p data-letters-delay="" data-split="letters" class="p-reg">
-                                                    Meet The Creator
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="button-bg is--secondary"></div>
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560dfe-b4ef2fa0" class="md--hide"></div>
-                            <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560dff-b4ef2fa0" class="home-col-cta">
-                                <div class="hero-p__wrap">
-                                    <p aria-hidden="true" data-split="lines" data-reveal="load" class="p-reg">
-                                        Never lose track of your Traeger (not affiliated). TragSync is a free, open-source 
-                                        web application that lets you monitor your grill’s temperature and status 
-                                        in real time—right from your web browser. Whether you’re smoking brisket 
-                                        or BBQ ribs, stay in control with live updates and peace of mind. 
-                                        Created by a solo web developer who happens to love smoking briskets.
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560e03-b4ef2fa0" class="home-hero-vid">
-                                <div class="hero-vid-bg"></div>
-                                <div class="hero-vid-wrap">
-                                    <img src="../assets/grillCard.png"/>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 220 220" fill="none"
-                                    class="home-vid-star">
-                                    <g opacity="0.3">
-                                        <rect x="220" y="109.498" width="1.00457" height="220"
-                                            transform="rotate(90 220 109.498)" fill="currentColor"></rect>
-                                        <rect x="187.426" y="31.8638" width="1.00457" height="220"
-                                            transform="rotate(45 187.426 31.8638)" fill="currentColor"></rect>
-                                    </g>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
+            <div class="nav-button-row">
+              <div data-o-anonymous="1" data-nav-button="" class="login-wrap">
+                <a aria-label="Log in" data-barba-prevent="" href="" class="link u--clip w-inline-block">
+                  <p data-letters-delay="" data-split="letters" class="p-reg">
+                    Log in
+                  </p>
+                </a>
+              </div>
+              <NuxtLink to="/grill" class="button small w-inline-block">
+                <div class="u--clip">
+                  <p data-letters-delay="" data-split="letters" class="p-reg">
+                    Get Started
+                  </p>
                 </div>
-                <div class="bg__unicorn-dark-overlay-top"></div>
-                <!-- <div class="bg__unicorn-dark-overlay-top"></div> --> <!-- uncomment this for a stronger gradient -->
-            </section>
-            <section id="dashboard" class="section">
-                <div class="bg__unicorn-dark-overlay-below-hero"></div>
-                <div class="container c-pad-top">
-                    <div class="spacer md--hide"></div>
-                    <div class="text-container text-center">
-                        <div class="container-small">
-                            <div class="flex-col a--center gap--med">
-                                <h2 class="h-medium sr-only">
-                                    The platform I wish we had, so I built it myself
-                                </h2>
-                                <h2 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
-                                    The platform I wish we had, so I built it myself —Wes
-                                </h2>
-                                <div class="db-text-row">
-                                    <p class="p-reg sr-only">
-                                        As a solo web developer who enjoys cooking on my pellet grill, 
-                                        I noticed our favorite peller smoker company didn't have a web app to monitor
-                                        our grills, so I built one myself. This web app gives you you a 
-                                        platform to check and monitor your pellet smoker during those long cooks 
-                                        (brisket, etc.).
-                                    </p>
-                                    <p aria-hidden="true" data-split="lines" data-reveal="scroll"
-                                        class="p-reg opacity--70">
-                                        As a solo web developer who enjoys cooking on my pellet grill, 
-                                        I noticed our favorite peller smoker company didn't have a web app to monitor
-                                        our grills, so I built one myself. This web app gives you you a 
-                                        platform to check and monitor your pellet smoker during those long cooks 
-                                        (brisket, etc.).
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="db-container">
-                        <div class="db-wrapper">
-                            <div class="db-base"></div>
-                            <!-- TragSync demo here, just an image or gif-->      
-                        </div>
-                    </div>
+                <div class="button-bg"></div>
+              </NuxtLink>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- ****END HEADER**** -->
+
+    <!-- ****START HERO**** -->
+    <div data-barba-namespace="home" data-barba="container" class="main-w">
+      <section data-hero-section="" class="section u--rel z--2">
+        <div class="bg__unicorn-dark-overlay"></div> <!-- NOTE: This adds the bottom dark shadow on the hero -->
+        <div class="container">
+          <div class="home-hero">
+            <div class="home-hero__inner">
+              <div data-load-items="wrap-p" class="hero-col-info">
+                <div class="flex-col">
+                  <div class="p-reg mask">
+                    <p>Real Time View</p>
+                  </div>
+                  <div class="p-reg mask">
+                    <p>Smoker Temp</p>
+                  </div>
+                  <div class="p-reg mask">
+                    <p>Probe Temp</p>
+                  </div>
+                  <div class="p-reg mask">
+                    <p>Clock</p>
+                  </div>
+                  <div class="p-reg mask">
+                    <p>Timer</p>
+                  </div>
                 </div>
-            </section>
-            <section class="section">
-                <div class="container c-pad-top">
-                    <div class="text-container text-center">
-                        <div class="flex-col gap--xxlarge a--center">
-                            <div class="container-small">
-                                <h3 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
-                                    I created TragSync to monitor my 
-                                    pellet smoker on the web so I don't have to pull out my phone. —Wes
-                                </h3>
-                            </div>
-                            <div class="divider testimonials"></div> <!-- This the line below the above html element -->
-                        </div>
-                    </div>
+                <div class="flex-col">
+                  <div class="p-reg mask">
+                    <p>Free To Use</p>
+                  </div>
+                  <div class="p-reg mask">
+                    <a href="https://github.com/wes-brook/Trag-Sync-Traeger-WebUI" target="_blank" rel="noopener"
+                      class="link opacity-100">
+                      Open Source < </a>
+                  </div>
+                  <div class="p-reg mask">
+                    <p>Any Browser</p>
+                  </div>
+                  <div class="p-reg mask">
+                    <p>WebPit</p>
+                  </div>
                 </div>
-            </section>
-            <section class="section u--rel">
-                <div class="container c-pad-top">
-                    <div data-start-wrap="" class="text-container text-center">
-                        <div class="container-medium">
-                            <div class="flex-col a--center gap--70">
-                                <div class="u--rel">
-                                    <h3 data-start-heading="" data-split="letters" aria-hidden="true" class="h-large">
-                                        The mobile app's cool. This one is better.
-                                    </h3>
-                                </div>
-                                <div class="about-button-row">
-                                    <a aria-label="become a member" href="/plans" class="button w-inline-block">
-                                        <div class="u--clip">
-                                            <p data-letters-delay="" data-split="letters" class="p-reg">
-                                                Get Started
-                                            </p>
-                                        </div>
-                                        <div class="button-bg"></div>
-                                    </a>
-                                    <button data-modal-cta="founders" aria-label="about the founders" id=""
-                                        class="button is--secondary">
-                                        <div class="button-inner-row">
-                                            <img loading="lazy"
-                                                src="../assets/me.png"
-                                                alt="Wes Brook" class="button-faces rounded-full" />
-                                            <div class="u--clip">
-                                                <p data-letters-delay="" data-split="letters" class="p-reg">
-                                                    About the Creator
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="button-bg is--secondary"></div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+              </div>
+              <div class="hero-col-title">
+                <h1 aria-hidden="true" data-split="lines" data-reveal="load" class="h-display">
+                  TragSync —Track<br>your smoker online.
+                </h1>
+                <div data-load-items="wrap-buttons" class="flex-row gap--tiny">
+                  <NuxtLink to="/grill" class="button w-inline-block">
+                    <div class="u--clip">
+                      <p data-letters-delay="" data-split="letters" class="p-reg">
+                        Get Started
+                      </p>
                     </div>
+                    <div class="button-bg"></div>
+                  </NuxtLink>
+                  <a href="https://www.linkedin.com/in/b-wes/" target="_blank" rel="noopener"
+                    class="button is--secondary" aria-label="about us">
+                    <div class="button-inner-row">
+                      <img loading="lazy" src="../assets/me.png" alt="Wes Brook" class="button-faces rounded-full" />
+                      <div class="u--clip">
+                        <p data-letters-delay="" data-split="letters" class="p-reg">
+                          Meet The Creator
+                        </p>
+                      </div>
+                    </div>
+                    <div class="button-bg is--secondary"></div>
+                  </a>
                 </div>
-                <div class="rock-wrap">
-                    <div class="rock-wrap-overlay"></div>
+              </div>
+              <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560dfe-b4ef2fa0" class="md--hide"></div>
+              <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560dff-b4ef2fa0" class="home-col-cta">
+                <div class="hero-p__wrap">
+                  <p aria-hidden="true" data-split="lines" data-reveal="load" class="p-reg">
+                    Never lose track of your Traeger (not affiliated). TragSync is a free, open-source
+                    web application that lets you monitor your grill’s temperature and status
+                    in real time—right from your web browser. Whether you’re smoking brisket
+                    or BBQ ribs, stay in control with live updates and peace of mind.
+                    Created by a solo web developer who happens to love smoking briskets.
+                  </p>
                 </div>
-            </section>
-            <section class="section u--rel">
-                <div data-tabs="wrapper" class="layout c-pad-top">
-                    <div class="layout-col md--full">
-                        <div class="container-large is-half">
-                            <div class="tab-container">
-                                <div class="tab-container-top">
-                                    <h3 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
-                                        Explore the features of TragSync
-                                    </h3>
-                                    <div data-flip-button="wrap" data-tabs="nav" class="filter-bar">
-                                        <button data-tabs="button" data-flip-button="button" class="filter-button">
-                                            <div class="p-med">WebPit</div>
-                                            <div data-flip-button="bg" class="tab-button__bg"></div>
-                                        </button>
-                                        <button data-tabs="button" data-flip-button="button" class="filter-button">
-                                            <div class="p-med">Community</div>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="flex-col a--left gap--xlarge">
-                                    <div data-tabs="content-wrap" class="tab-content-wrap">
-                                        <div data-tabs="content-item" class="tab-content-item active">
-                                            <h4 data-split="lines" class="h-small">
-                                                The Virtual BBQ PitStop
-                                            </h4>
-                                            <p aria-hidden="true" data-split="lines" class="p-reg opacity--70">
-                                                WebPit is your virtual pitstop where your pellet smoker lives. Organized into
-                                                clear categories , it’s designed to make monitoring your smoker easily.
-                                                Whether you’re monitoring temperature, cook time,
-                                                or probe temperature, this quick-use interface has you covered.
-                                                Simple, organized, and ready to help you master the flame.
-                                            </p>
-                                        </div>
-                                        <div data-tabs="content-item" class="tab-content-item">
-                                            <h4 data-split="lines" class="h-small">
-                                                Sure, it &#x27;s a buzzword
-                                            </h4>
-                                            <p aria-hidden="true" data-split="lines" class="p-reg opacity--70">
-                                                The word ‘community’ gets thrown around a lot these
-                                                days, but we genuinely believe it’s the best way to
-                                                connect with other creators. Whether it’s solving tricky
-                                                problems together, sharing ideas, or just finding people
-                                                who get what you’re trying to build, this is where those
-                                                connections happen. We &#x27;re on Slack, so no need to
-                                                go to some dedicated tool online that you &#x27;ll
-                                                forget about.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layout-col md--full">
-                        <div data-tabs="visual-wrap" class="tab-visual-wrap">
-                            <div data-tabs-content="video" data-tabs="visual-item" class="tab-visual-item active">
-                                <div class="tabs-vid-wrap">
-                                    <div class="tabs-vid-wrap-inner">
-                                        <!-- Something here -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-tabs-content="video" data-tabs="visual-item" class="tab-visual-item">
-                                <div class="tabs-vid-wrap">
-                                    <div class="tabs-vid-wrap-inner">
-                                        <!-- Something here -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-tabs="visual-item" class="tab-visual-item">
-                                <div class="tabs-vid-wrap">
-                                    <div class="tabs-vid-wrap-inner">
-                                        <!-- Something here -->
-                                        <div class="slack-overlay"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div id="w-node-_2aacde1c-7b79-249f-2926-1a8bf2560e03-b4ef2fa0" class="home-hero-pic">
+                <div class="hero-pic-bg"></div>
+                <div class="hero-pic-wrap">
+                  <img src="../assets/grillCard.png" />
                 </div>
-            </section>
-            <footer class="footer section">
-                <div class="container">
-                    <div class="footer-cta">
-                        <div class="u--abs top">
-                            <div class="divider opacity--25"></div>
-                        </div>
-                        <div class="container-small">
-                            <div class="flex-col a--center gap--med">
-                                <h2 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
-                                    Let’s get to grilling. Sign up and get started.
-                                </h2>
-                            </div>
-                        </div>
-                        <a aria-label="become a member" href="/plans" class="button w-inline-block">
-                            <div class="u--clip">
-                                <p data-letters-delay="" data-split="letters" class="p-reg">
-                                    Get Started
-                                </p>
-                            </div>
-                            <div class="button-bg"></div>
-                        </a>
-                        <div class="u--abs bottom">
-                            <div class="divider opacity--25"></div>
-                        </div>
-                    </div>
-                    <div class="footer-main">
-                        <div class="footer-top-row">
-                            <div class="footer-content-row">
-                                <div class="footer-link-col">
-                                    <h3 class="eyebrow opacity--50">sitemap</h3>
-                                    <ul class="flex-col a--left">
-                                        <li class="p-reg mask">
-                                            <a href="/" aria-current="page" class="link w--current">Home</a>
-                                        </li>
-                                        <div class="u--rel">
-                                            <li class="p-reg mask">
-                                                <a href="/updates" class="link">Updates</a>
-                                            </li>
-                                            <div class="updates-count footer">
-                                                <p data-updates-nr="" class="eyebrow">1</p>
-                                            </div>
-                                        </div>
-                                        <li class="p-reg mask">
-                                            <a href="/faq" class="link">FAQ</a>
-                                        </li>
-                                        <li class="p-reg mask">
-                                            <a href="/Grill" class="link">Log In</a>
-                                        </li>
-                                        <li class="p-reg mask">
-                                            <a href="/Grill" class="link">Get Started</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                            </div>
-                            <div class="footer-form-col">
-                                <div class="footer-link-col full">
-                                    <h3 class="eyebrow opacity--50">contact</h3>
-                                    <div>
-                                        <p class="p-reg">
-                                            Have a question, shoot me an email!
-                                        </p>
-                                        <div class="p-reg mask"></div>
-                                        <div data-form-validate="" class="footer-form w-form">
-                                            <form method="get"
-                                                data-mapping='{"emailListUid":"z9Mzy7W4","formId":"677a641f2b80576f18353331","fieldMappings":[{"formField":"Name 2","outsetaField":"Person.FirstName"},{"formField":"Email 3","outsetaField":"Person.Email"}]}'
-                                                name="email-form" data-name="Email Form" data-o-email-form="1"
-                                                id="email-form" class="footer-form-grid"
-                                                data-wf-page-id="67791bd7ad8b4863b4ef2fa0"
-                                                data-wf-element-id="bcb30f9c-ba4d-1896-2ca4-79a602332dce">
-                                                <div data-validate="" class="footer-field-group">
-                                                    <input class="footer-form-field w-input" maxlength="256"
-                                                        name="name-2" data-name="Name 2" min="2"
-                                                        placeholder="First name" type="text" id="name-2" required="" />
-                                                </div>
-                                                <div data-validate="" class="footer-field-group">
-                                                    <input class="footer-form-field w-input" maxlength="256"
-                                                        name="Email-3" data-name="Email 3"
-                                                        placeholder="Email" type="email" id="Email-3"
-                                                        required="" />
-                                                </div>
-                                                <div data-submit="" class="footer-form-button">
-                                                    <a id="form-button" aria-label="sign up" href="#"
-                                                        class="button small is--secondary w-inline-block">
-                                                        <div class="u--clip">
-                                                            <p data-letters-delay="" data-split="letters" class="p-reg">
-                                                               Send
-                                                            </p>
-                                                        </div>
-                                                        <div class="button-bg is--secondary"></div>
-                                                    </a>
-                                                    <input type="submit" data-wait="Please wait..."
-                                                        class="u--hide w-button" value="Submit" />
-                                                </div>
-                                            </form>
-                                            <div class="form-sucess w-form-done">
-                                                <div class="eyebrow">
-                                                    amazing, we &#x27;ll keep you in the loop!
-                                                </div>
-                                            </div>
-                                            <div class="form-error w-form-fail">
-                                                <div class="eyebrow">
-                                                    hmmm, something went wrong. sorry!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h1 class="footer-logo text-9xl">TragSync</h1> <!-- The cool opaque web app logo at the bottom -->
-                        <div class="footer-bottom-row">
-                            <div class="footer-bottom-col">
-                                <div class="footer-copyright">
-                                    <p class="eyebrow">
-                                        ©<span data-current-year="">2025</span>
-                                        TragSync. All rights reserved.
-                                    </p>
-                                </div>
-                                <ul class="flex-row gap--small sm--hide">
-                                    <li class="footer-li">
-                                        <a href="https://www.linkedin.com/in/wesly-barayuga" target="_blank" rel="noopener"
-                                            class="eyebrow link">linkedin</a>
-                                        <div class="eyebrow">,</div>
-                                    </li>
-                                    <li class="footer-li">
-                                        <a href="https://github.com/wes-brook/Trag-Sync-Traeger-WebUI" target="_blank" rel="noopener"
-                                            class="eyebrow link">github repo</a>
-                                        <div class="eyebrow">,</div>
-                                    </li>
-                                    <li class="footer-li">
-                                        <a href="https://www.youtube.com/@Cheff_Wes" target="_blank" rel="noopener"
-                                            class="eyebrow link">youtube</a>
-                                    </li>
-                                </ul>
-                                <p class="eyebrow">
-                                    built by 
-                                    <a href="" target="_blank" class="link">Wes Brook</a>
-                                </p>
-                            </div>
-                            <!-- <p class="eyebrow">
-                                a thing by
-                                <a href="" target="_blank" class="link">Wes Brook</a>
-                            </p> -->
-                        </div>
-                    </div>
-                </div>
-            </footer>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 220 220" fill="none"
+                  class="home-pic-accent">
+                  <g opacity="0.3">
+                    <rect x="220" y="109.498" width="1.00457" height="220" transform="rotate(90 220 109.498)"
+                      fill="currentColor"></rect>
+                    <rect x="187.426" y="31.8638" width="1.00457" height="220" transform="rotate(45 187.426 31.8638)"
+                      fill="currentColor"></rect>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="bg__unicorn-dark-overlay-top"></div> <!-- Intensify dark gradient in hero -->
+      </section>
+      <!-- ****END HERO****-->
+
+      <!-- ****DEMO SECTION**** -->
+      <section id="dashboard" class="section">
+        <div class="bg__unicorn-dark-overlay-below-hero"></div>
+        <div class="container c-pad-top">
+          <div class="spacer md--hide"></div>
+          <div class="text-container text-center">
+            <div class="container-small">
+              <div class="flex-col a--center gap--med">
+                <h2 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
+                  The platform I wish we had, so I built it myself —Wes
+                </h2>
+                <div class="db-text-row">
+                  <p aria-hidden="true" data-split="lines" data-reveal="scroll" class="p-reg opacity--70">
+                    As a solo web developer who enjoys cooking on my pellet grill,
+                    I noticed our favorite pellet smoker company lacked a web application for monitoring
+                    our grills, so I built one myself. This web app gives you you a
+                    platform to keep an eye on your pellet smoker during those long cooks, 
+                    <strong>all in your browser</strong>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="db-container">
+            <div class="db-wrapper">
+              <div class="db-base"></div>
+              <!-- TragSync demo will go here, just an image or gif -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ****MOTIVE SECTION**** -->
+      <section class="section">
+        <div class="container c-pad-top">
+          <div class="text-container text-center">
+            <div class="flex-col gap--xxlarge a--center">
+              <div class="container-small">
+                <h3 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
+                  I created TragSync to monitor my pellet
+                  smoker directly on any browser, eliminating
+                  the need to pull out the mobile app —Wes
+                </h3>
+              </div>
+              <div class="divider motive"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ****EXTRA SECTION**** -->
+      <section class="section u--rel">
+        <div class="container c-pad-top">
+          <div data-start-wrap="" class="text-container text-center">
+            <div class="container-medium">
+              <div class="flex-col a--center gap--70">
+                <div class="u--rel">
+                  <h3 data-start-heading="" data-split="letters" aria-hidden="true" class="h-large">
+                    The mobile app is cool. This one is BETTER.
+                  </h3>
+                </div>
+                <div class="about-button-row">
+                  <NuxtLink to="/grill" class="button w-inline-block">
+                    <div class="u--clip">
+                      <p data-letters-delay="" data-split="letters" class="p-reg">
+                        Get Started
+                      </p>
+                    </div>
+                    <div class="button-bg"></div>
+                  </NuxtLink>
+                  <a href="https://www.linkedin.com/in/b-wes/" target="_blank" rel="noopener"
+                    class="button is--secondary" aria-label="about us">
+                    <div class="button-inner-row">
+                      <img loading="lazy" src="../assets/me.png" alt="Wes Brook" class="button-faces rounded-full" />
+                      <div class="u--clip">
+                        <p data-letters-delay="" data-split="letters" class="p-reg">
+                          About The Creator
+                        </p>
+                      </div>
+                    </div>
+                    <div class="button-bg is--secondary"></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fade-wrap">
+          <div class="fade-wrap-overlay"></div>
+        </div>
+      </section>
+
+      <!-- ****FEATURES SECTION**** -->
+      <section class="section u--rel">
+        <div data-tabs="wrapper" class="layout c-pad-top">
+          <div class="layout-col md--full">
+            <div class="container-large is-half">
+              <div class="tab-container">
+                <div class="tab-container-top">
+                  <h3 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
+                    Explore the features of TragSync
+                  </h3>
+                  <div data-flip-button="wrap" data-tabs="nav" class="filter-bar">
+                    <button data-tabs="button" data-flip-button="button" class="filter-button">
+                      <div class="p-med">WebPit</div>
+                      <div data-flip-button="bg" class="tab-button__bg"></div>
+                    </button>
+                    <button data-tabs="button" data-flip-button="button" class="filter-button">
+                      <div class="p-med">Community</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex-col a--left gap--xlarge">
+                  <div data-tabs="content-wrap" class="tab-content-wrap">
+                    <div data-tabs="content-item" class="tab-content-item active">
+                      <h4 data-split="lines" class="h-small">
+                        The Virtual BBQ PitStop
+                      </h4>
+                      <p aria-hidden="true" data-split="lines" class="p-reg opacity--70">
+                        WebPit is your virtual pitstop where your pellet smoker lives. Organized into
+                        clear categories , it’s designed to make monitoring your smoker easily.
+                        Whether you’re monitoring temperature, cook time,
+                        or probe temperature, this quick-use interface has you covered.
+                        Simple, organized, and ready to help you master the flame.
+                      </p>
+                    </div>
+                    <div data-tabs="content-item" class="tab-content-item">
+                      <h4 data-split="lines" class="h-small">
+                        in progress
+                      </h4>
+                      <p aria-hidden="true" data-split="lines" class="p-reg opacity--70">
+                        in progress
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layout-col md--full">
+            <div data-tabs="visual-wrap" class="tab-visual-wrap">
+              <div data-tabs-content="video" data-tabs="visual-item" class="tab-visual-item active">
+                <div class="tabs-vid-wrap">
+                  <div class="tabs-vid-wrap-inner">
+                    <!-- Something here -->
+                  </div>
+                </div>
+              </div>
+              <div data-tabs-content="video" data-tabs="visual-item" class="tab-visual-item">
+                <div class="tabs-vid-wrap">
+                  <div class="tabs-vid-wrap-inner">
+                    <!-- Something here -->
+                  </div>
+                </div>
+              </div>
+              <div data-tabs="visual-item" class="tab-visual-item">
+                <div class="tabs-vid-wrap">
+                  <div class="tabs-vid-wrap-inner">
+                    <!-- Something here -->
+                    <div class="slack-overlay"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ****START FOOTER**** -->
+      <footer class="footer section">
+        <div class="container">
+          <div class="footer-cta">
+            <div class="u--abs top">
+              <div class="divider opacity--25"></div>
+            </div>
+            <div class="container-small">
+              <div class="flex-col a--center gap--med">
+                <h2 aria-hidden="true" data-split="lines" data-reveal="scroll" class="h-medium">
+                  Let’s get to grilling. Sign up and get started.
+                </h2>
+              </div>
+            </div>
+            <NuxtLink to="/grill" class="button w-inline-block">
+              <div class="u--clip">
+                <p data-letters-delay="" data-split="letters" class="p-reg">
+                  Get Started
+                </p>
+              </div>
+              <div class="button-bg"></div>
+            </NuxtLink>
+            <div class="u--abs bottom">
+              <div class="divider opacity--25"></div>
+            </div>
+          </div>
+          <div class="footer-main">
+            <div class="footer-top-row">
+              <div class="footer-content-row">
+                <div class="footer-link-col">
+                  <h3 class="eyebrow opacity--50">sitemap</h3>
+                  <ul class="flex-col a--left">
+                    <li class="p-reg mask">
+                      <a href="/" aria-current="page" class="link w--current">Home</a>
+                    </li>
+                    <div class="u--rel">
+                      <li class="p-reg mask">
+                        <a href="/updates" class="link">Updates</a>
+                      </li>
+                      <div class="updates-count footer">
+                        <p data-updates-nr="" class="eyebrow">1</p>
+                      </div>
+                    </div>
+                    <li class="p-reg mask">
+                      <a href="/faq" class="link">FAQ</a>
+                    </li>
+                    <li class="p-reg mask">
+                      <a href="/grill" class="link">Log In</a>
+                    </li>
+                    <li class="p-reg mask">
+                      <NuxtLink to="/grill">
+                        <p class="link">Get Started</p>
+                      </NuxtLink>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+              <div class="footer-form-col">
+                <div class="footer-link-col full">
+                  <h3 class="eyebrow opacity--50">contact</h3>
+                  <div>
+                    <p class="p-reg">
+                      Have a question, shoot me an email!
+                    </p>
+                    <div class="p-reg mask"></div>
+                    <div data-form-validate="" class="footer-form w-form">
+                      <form method="get"
+                        data-mapping='{"emailListUid":"z9Mzy7W4","formId":"677a641f2b80576f18353331","fieldMappings":[{"formField":"Name 2","outsetaField":"Person.FirstName"},{"formField":"Email 3","outsetaField":"Person.Email"}]}'
+                        name="email-form" data-name="Email Form" data-o-email-form="1" id="email-form"
+                        class="footer-form-grid" data-wf-page-id="67791bd7ad8b4863b4ef2fa0"
+                        data-wf-element-id="bcb30f9c-ba4d-1896-2ca4-79a602332dce">
+                        <div data-validate="" class="footer-field-group">
+                          <input class="footer-form-field w-input" maxlength="256" name="name-2" data-name="Name 2"
+                            min="2" placeholder="First name" type="text" id="name-2" required="" />
+                        </div>
+                        <div data-validate="" class="footer-field-group">
+                          <input class="footer-form-field w-input" maxlength="256" name="Email-3" data-name="Email 3"
+                            placeholder="Email" type="email" id="Email-3" required="" />
+                        </div>
+                        <div data-submit="" class="footer-form-button">
+                          <a id="form-button" aria-label="sign up" href="#"
+                            class="button small is--secondary w-inline-block">
+                            <div class="u--clip">
+                              <p data-letters-delay="" data-split="letters" class="p-reg">
+                                Send
+                              </p>
+                            </div>
+                            <div class="button-bg is--secondary"></div>
+                          </a>
+                          <input type="submit" data-wait="Please wait..." class="u--hide w-button" value="Submit" />
+                        </div>
+                      </form>
+                      <div class="form-sucess w-form-done">
+                        <div class="eyebrow">
+                          amazing, we &#x27;ll keep you in the loop!
+                        </div>
+                      </div>
+                      <div class="form-error w-form-fail">
+                        <div class="eyebrow">
+                          hmmm, something went wrong. sorry!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h1 class="footer-logo text-9xl">TragSync</h1> <!-- The cool opaque web app logo at the bottom -->
+            <div class="footer-bottom-row">
+              <div class="footer-bottom-col">
+                <div class="footer-copyright">
+                  <p class="eyebrow">
+                    ©<span data-current-year="">2025</span>
+                    TragSync. All rights reserved.
+                  </p>
+                </div>
+                <ul class="flex-row gap--small sm--hide">
+                  <li class="footer-li">
+                    <a href="https://www.linkedin.com/in/wesly-barayuga" target="_blank" rel="noopener"
+                      class="eyebrow link">linkedin</a>
+                    <div class="eyebrow">,</div>
+                  </li>
+                  <li class="footer-li">
+                    <a href="https://github.com/wes-brook/Trag-Sync-Traeger-WebUI" target="_blank" rel="noopener"
+                      class="eyebrow link">github repo</a>
+                    <div class="eyebrow">,</div>
+                  </li>
+                  <li class="footer-li">
+                    <a href="https://www.youtube.com/@Cheff_Wes" target="_blank" rel="noopener"
+                      class="eyebrow link">youtube</a>
+                  </li>
+                </ul>
+                <p class="eyebrow">
+                  built by
+                  <a href="/" target="_blank" class="link">Wes Brook</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- ****END FOOTER**** -->
+
     </div>
+  </div>
 </template>
 
 <style>
-
-@import './styles.css';
-@import '../assets/styles.css';
-
-.body {
-    background: linear-gradient(90deg, #000 0.01%, #5b5a5afc 65.5%, #fff);
-    /* background: linear-gradient(90deg, #000000 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */
-}
-
-/* added 10:29am  */
-/* body {
-  margin: 0;
-}
+/* @import '../assets/styles.css'; commented out, unsure if needed*/
+@import '../assets/main.css';
 
 .body {
-  background-color: var(--color-black);
-  color: var(--color-neutral-200);
-  justify-content: center;
-  align-items: center;
-  font-family: PP Neue Montreal, Arial, sans-serif;
-  font-weight: 500;
-  line-height: 1;
+  background: linear-gradient(90deg, #000 0.01%, #5b5a5afc 65.5%, #fff);
 }
-
-.body.is--dashboard {
-  background-color: var(--color-light);
-  color: var(--color-dark);
-} */
-
-/* added 10:29am  */
 
 /* ------------------------- Variables -------------------------------------------------- */
 :root {
@@ -596,14 +542,10 @@ useHead({
   /* screen-size in design - no px */
   --size-container-min: 992px;
   --size-container-max: 1920px;
-  --size-container: clamp(
-    var(--size-container-min),
-    100vw,
-    var(--size-container-max)
-  );
-  --size-font: calc(
-    var(--size-container) / (var(--size-container-ideal) / var(--size-unit))
-  );
+  --size-container: clamp(var(--size-container-min),
+      100vw,
+      var(--size-container-max));
+  --size-font: calc(var(--size-container) / (var(--size-container-ideal) / var(--size-unit)));
 }
 
 /* Tablet */
@@ -643,19 +585,19 @@ body {
 }
 
 /* ------------------------- Hide Scrollbar -------------------------------------------------- */
-body ::-webkit-scrollbar {
+/* body ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 /* Chrome, Safari, Opera */
-body {
+/* body {
   -ms-overflow-style: none;
-}
+} */
 
 /* IE & Edge */
-html {
+/* html {
   scrollbar-width: none;
-}
+} */
 
 /* Firefox */
 /* ------------------------- body -------------------------------------------------- */
@@ -721,13 +663,13 @@ a {
   margin-bottom: -0.1em;
 }
 
-.video-player .hero-vid-wrap {
+.video-player .hero-pic-wrap {
   margin-bottom: 0em;
   inset: 0em;
   position: absolute;
 }
 
-.home-hero-vid .hero-vid-wrap {
+.home-hero-pic .hero-pic-wrap {
   opacity: 1 !important;
 }
 
@@ -810,8 +752,7 @@ body[data-scrolling-started="true"] .header-bg {
 }
 
 body[data-scrolling-started="true"][data-nav-status="closed"] .header {
-  padding: calc(var(--container-padding) / 2) calc(var(--container-padding) / 2)
-    0px calc(var(--container-padding) / 2);
+  padding: calc(var(--container-padding) / 2) calc(var(--container-padding) / 2) 0px calc(var(--container-padding) / 2);
 }
 
 .trusted-nav-list:has(.trusted-nav-item.active) .trusted-nav-item.active {
@@ -833,27 +774,23 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
 
 .header-bg,
 .home-hero-bg {
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.15) 65%,
-    rgba(0, 0, 0, 0.075) 75.5%,
-    rgba(0, 0, 0, 0.037) 82.85%,
-    rgba(0, 0, 0, 0.019) 88%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background-image: linear-gradient(rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.15) 65%,
+      rgba(0, 0, 0, 0.075) 75.5%,
+      rgba(0, 0, 0, 0.037) 82.85%,
+      rgba(0, 0, 0, 0.019) 88%,
+      rgba(0, 0, 0, 0) 100%);
 }
 
 .gradient-overlay {
-  background-image: linear-gradient(
-    rgba(14, 14, 14, 1) 0%,
-    rgba(14, 14, 14, 0.3) 50%,
-    rgba(14, 14, 14, 0.15) 65%,
-    rgba(14, 14, 14, 0.075) 75.5%,
-    rgba(14, 14, 14, 0.037) 82.85%,
-    rgba(14, 14, 14, 0.019) 88%,
-    rgba(14, 14, 14, 0) 100%
-  );
+  background-image: linear-gradient(rgba(14, 14, 14, 1) 0%,
+      rgba(14, 14, 14, 0.3) 50%,
+      rgba(14, 14, 14, 0.15) 65%,
+      rgba(14, 14, 14, 0.075) 75.5%,
+      rgba(14, 14, 14, 0.037) 82.85%,
+      rgba(14, 14, 14, 0.019) 88%,
+      rgba(14, 14, 14, 0) 100%);
 }
 
 .db-notification {
@@ -864,8 +801,7 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
 }
 
 .db-notification[data-notification-status="active"] {
-  transition: transform var(--duration-default-half)
-    cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--duration-default-half) cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateY(0em) rotate(0.001deg);
   opacity: 1;
 }
@@ -922,7 +858,7 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
     transform: scale(0.99, 0.95);
   }
 
-  .home-hero-vid:hover .hero-vid-bg {
+  .home-hero-pic:hover .hero-pic-bg {
     background-color: rgba(255, 255, 255, 0.1);
   }
 
@@ -997,8 +933,7 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   padding: calc(var(--g) + var(--b));
   outline: var(--b) solid var(--color-primary);
   outline-offset: calc(var(--g) / -1);
-  mask: conic-gradient(at var(--s) var(--s), #0000 75%, #000 0) 0 0 /
-      calc(100% - var(--s)) calc(100% - var(--s)),
+  mask: conic-gradient(at var(--s) var(--s), #0000 75%, #000 0) 0 0 / calc(100% - var(--s)) calc(100% - var(--s)),
     linear-gradient(#000 0 0) content-box;
   transition: all 0.4s var(--cubic-default);
 }
@@ -1053,17 +988,13 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   opacity: 0.2;
 }
 
-.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-loaded="true"]
-  .vimeo-overlay-dark,
-.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-loaded="true"]
-  .vimeo-placeholder {
+.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-loaded="true"] .vimeo-overlay-dark,
+.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-loaded="true"] .vimeo-placeholder {
   opacity: 0;
 }
 
 @media (hover: hover) {
-  .single-vimeo-player
-    [data-vimeo-status-hover="true"]:hover
-    .vimeo-overlay-dark {
+  .single-vimeo-player [data-vimeo-status-hover="true"]:hover .vimeo-overlay-dark {
     opacity: 0.3 !important;
   }
 }
@@ -1080,16 +1011,13 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   gap: 1rem;
 }
 
-.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="false"]
-  .vimeo-overlay-interface,
-.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-hover="true"]:hover
-  .vimeo-overlay-interface {
+.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="false"] .vimeo-overlay-interface,
+.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-hover="true"]:hover .vimeo-overlay-interface {
   opacity: 1;
 }
 
 @media screen and (max-width: 1024px) {
-  .single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="true"]
-    .vimeo-overlay-interface {
+  .single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="true"] .vimeo-overlay-interface {
     opacity: 0 !important;
   }
 }
@@ -1119,15 +1047,11 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   display: none;
 }
 
-.single-vimeo-player[data-vimeo-status-muted="true"]
-  .vimeo-mute
-  svg:nth-child(1) {
+.single-vimeo-player[data-vimeo-status-muted="true"] .vimeo-mute svg:nth-child(1) {
   display: none;
 }
 
-.single-vimeo-player[data-vimeo-status-muted="true"]
-  .vimeo-mute
-  svg:nth-child(2) {
+.single-vimeo-player[data-vimeo-status-muted="true"] .vimeo-mute svg:nth-child(2) {
   display: block;
 }
 
@@ -1163,7 +1087,7 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   --dot-color: var(--color-primary);
 }
 
-.single-vimeo-player .vimeo-timeline > input {
+.single-vimeo-player .vimeo-timeline>input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -1177,7 +1101,7 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   cursor: pointer;
 }
 
-.single-vimeo-player .vimeo-timeline > progress {
+.single-vimeo-player .vimeo-timeline>progress {
   width: 100%;
   position: absolute;
   left: 0;
@@ -1336,19 +1260,13 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   stroke: var(--color-dark);
 }
 
-.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="false"]
-  .vimeo-overlay-pause
-  .icon,
-.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-hover="true"]:hover
-  .vimeo-overlay-pause
-  .icon {
+.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="false"] .vimeo-overlay-pause .icon,
+.single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-hover="true"]:hover .vimeo-overlay-pause .icon {
   opacity: 1;
 }
 
 @media screen and (max-width: 1024px) {
-  .single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="true"]
-    .vimeo-overlay-pause
-    .icon {
+  .single-vimeo-player[data-vimeo-status-activated="true"][data-vimeo-status-play="true"] .vimeo-overlay-pause .icon {
     opacity: 0 !important;
   }
 }
@@ -1369,8 +1287,7 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
   opacity: 1;
 }
 
-.single-vimeo-player[data-vimeo-status-play="true"][data-vimeo-status-loaded="true"]
-  .vimeo-overlay-loading {
+.single-vimeo-player[data-vimeo-status-play="true"][data-vimeo-status-loaded="true"] .vimeo-overlay-loading {
   opacity: 0;
 }
 
@@ -1381,5 +1298,4 @@ body[data-scrolling-started="true"][data-nav-status="closed"] .header {
 .single-vimeo-player .vimeo-overlay-loading svg path {
   fill: var(--color-white);
 }
-
 </style>
