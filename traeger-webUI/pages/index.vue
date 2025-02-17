@@ -109,9 +109,9 @@ useHead({
                     <p>Free To Use</p>
                   </div>
                   <div class="p-reg mask">
-                    <a href="https://github.com/wes-brook/Trag-Sync-Traeger-WebUI" target="_blank" rel="noopener" class="link opacity-100">
-                      Open Source <
-                    </a>
+                    <a href="https://github.com/wes-brook/Trag-Sync-Traeger-WebUI" target="_blank" rel="noopener"
+                      class="link opacity-100">
+                      Open Source < </a>
                   </div>
                   <div class="p-reg mask">
                     <p>Any Browser</p>
@@ -310,17 +310,10 @@ useHead({
                     </div>
                     <div data-tabs="content-item" class="tab-content-item">
                       <h4 data-split="lines" class="h-small">
-                        in <progress></progress>
+                        in progress
                       </h4>
                       <p aria-hidden="true" data-split="lines" class="p-reg opacity--70">
-                        The word ‘community’ gets thrown around a lot these
-                        days, but we genuinely believe it’s the best way to
-                        connect with other creators. Whether it’s solving tricky
-                        problems together, sharing ideas, or just finding people
-                        who get what you’re trying to build, this is where those
-                        connections happen. We &#x27;re on Slack, so no need to
-                        go to some dedicated tool online that you &#x27;ll
-                        forget about.
+                        in progress
                       </p>
                     </div>
                   </div>
@@ -492,7 +485,7 @@ useHead({
                 </ul>
                 <p class="eyebrow">
                   built by
-                  <a href="" target="_blank" class="link">Wes Brook</a>
+                  <a href="/" target="_blank" class="link">Wes Brook</a>
                 </p>
               </div>
             </div>
@@ -511,30 +504,7 @@ useHead({
 
 .body {
   background: linear-gradient(90deg, #000 0.01%, #5b5a5afc 65.5%, #fff);
-  /* background: linear-gradient(90deg, #000000 0.01%, rgba(196, 113, 62, 0.99) 65.5%, #ffffff 100%); */
 }
-
-/* added 10:29am  */
-/* body {
-  margin: 0;
-}
-
-.body {
-  background-color: var(--color-black);
-  color: var(--color-neutral-200);
-  justify-content: center;
-  align-items: center;
-  font-family: PP Neue Montreal, Arial, sans-serif;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.body.is--dashboard {
-  background-color: var(--color-light);
-  color: var(--color-dark);
-} */
-
-/* added 10:29am  */
 
 /* ------------------------- Variables -------------------------------------------------- */
 :root {
