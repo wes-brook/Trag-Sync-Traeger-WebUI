@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // baseURL: 'http://localhost:3001/api', // Express server URL
-  baseURL: 'https://traeger-webui-backend.onrender.com/api',
+  baseURL: 'http://localhost:3001/api', // Express server URL
+  // baseURL: 'https://traeger-webui-backend.onrender.com/api',
 });
 
 export const getGrillData = async () => {

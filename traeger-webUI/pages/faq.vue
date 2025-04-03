@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        faq is in the works
+        faq page is in the works
     </div>
 </template>
 

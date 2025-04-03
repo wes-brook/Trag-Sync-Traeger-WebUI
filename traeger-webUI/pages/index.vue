@@ -123,7 +123,7 @@ useHead({
               </div>
               <div class="hero-col-title">
                 <h1 aria-hidden="true" data-split="lines" data-reveal="load" class="h-display">
-                  TragSync —Track<br>your smoker online.
+                  TragSync — Sync<br>your smoker online.
                 </h1>
                 <div data-load-items="wrap-buttons" class="flex-row gap--tiny">
                   <NuxtLink to="/grill" class="button w-inline-block">

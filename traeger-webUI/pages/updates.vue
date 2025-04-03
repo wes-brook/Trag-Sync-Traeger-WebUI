@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        
+        updates page in the works
     </div>
 </template>
 
