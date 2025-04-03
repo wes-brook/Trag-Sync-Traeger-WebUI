@@ -1,120 +1,155 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { getGrillData } from '~/services/api';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { socket, isConnected } from '~/services/socketService';
 import GrillStatusIndicator from '~/components/GrillStatusIndicator.vue';
 
+// --- Reactive State ---
 const smokerData = ref({
-  grillName: "Grill Name",
+  grillName: "Connecting...",
   currentTemp: 0,
   setTemp: 0,
   probeTemp: 0,
-  time: "[X:XX]",
-  grillSystemStatus: 99, // Default status
+  serverTime: null,
+  lastGrillUpdate: null,
+  grillTimestamp: null,
+  systemStatus: 99,
+  connected: false,
+  units: 'F',
 });
 
-// Computed property to determine the temperature display
+// New ref for the locally updated current time
+const currentTime = ref('--:--');
+// Variable to hold the interval timer ID for cleanup
+let clockIntervalId = null;
+
+// --- Computed Properties ---
 const temperatureDisplay = computed(() => {
-  if (smokerData.value.grillSystemStatus === 99) {
-    return "---°F"; // Offline
+  if (!smokerData.value.connected) {
+      return "---°" + (smokerData.value.units || 'F');
   } else {
-    return `${smokerData.value.currentTemp}°F`; // Sleeping or Idle
+      return `${smokerData.value.currentTemp}°${smokerData.value.units || 'F'}`;
   }
 });
 
-// Computed property to determine the status text display
 const statusTextDisplay = computed(() => {
-  switch (smokerData.value.grillSystemStatus) {
-    // case 1: // Offline
-    //   return "OFFLINE";
-    case 2: // Sleeping
-      return "SLEEPING";
-    case 3: // Idle
-      return "IDLE";
-    case 4: // Igniting
-      return "IGNITING";
-    case 5: // Preheating
-      return "PREHEATING";
-    case 6: // Manual Cook
-      return "COOKING";
-    case 8: // Cool Down
-        return "COOLING";
-    case 9: // Shut Down
-        return "SHUT DOWN";
-    case 10: // Unknown Status - Server Side AWS error (bad)
-        return "AWS ERR"
-    case 99: // think this means server online but grill is physically off (unplugged or plugged but switched off)
-        return "OFFLINE"
-    default:
-      return "SERVER DOWN"; // Unknown Status - Client Side error (very bad)
+   if (!smokerData.value.connected && smokerData.value.systemStatus === 99) {
+        return "OFFLINE";
+   }
+  switch (smokerData.value.systemStatus) {
+    case 2: return "SLEEPING";
+    case 3: return "IDLE";
+    case 4: return "IGNITING";
+    case 5: return "PREHEATING";
+    case 6: return "COOKING";
+    case 8: return "COOLING";
+    case 9: return "SHUT DOWN";
+    case 10: return "AWS ERR";
+    case 99: return "OFFLINE";
+    default: return "UNKNOWN";
   }
 });
 
-// Computed property to determine the opacity of SET TEMP and PROBE TEMP
-// Opacity 1 if grillSystemStatus is 3, 4, 5, 6 or 7
 const infoOpacity = computed(() => {
-    return [3, 4, 5, 6, 7].includes(smokerData.value.grillSystemStatus) ? 1 : 0.5; // 100% for Idle, 50% otherwise
+    return [3, 4, 5, 6].includes(smokerData.value.systemStatus) ? 1 : 0.5;
 });
 
-const fetchGrillData = async () => {
-  const data = await getGrillData();
-  if (data && data.currentTemp !== 0) {
+// --- WebSocket Update Handler ---
+const handleGrillUpdate = (data) => {
+  console.log('Received grillStateUpdate in component:', data);
+  if (data) {
     smokerData.value = {
-      grillName: data.grillName,
-      currentTemp: data.currentTemp,
-      setTemp: data.setTemp,
-      probeTemp: data.probeTemp,
-      time: new Date(data.time).toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-      }).replace(/^0/, ''),
-      grillSystemStatus: data.systemStatus || 99,
+      grillName: data.grillName || "Grill Name",
+      currentTemp: data.currentTemp ?? 0,
+      setTemp: data.setTemp ?? 0,
+      probeTemp: data.probeTemp ?? 0,
+      serverTime: data.serverTime,
+      lastGrillUpdate: data.lastGrillUpdate,
+      grillTimestamp: data.grillTimestamp,
+      systemStatus: data.systemStatus ?? 99,
+      connected: data.connected ?? false,
+      units: data.units || 'F',
     };
+  } else {
+    console.warn("Received empty/invalid data from grillStateUpdate event.");
   }
 };
 
+// --- Local Time Updater ---
+const updateCurrentTime = () => {
+    currentTime.value = new Date().toLocaleTimeString([], {
+        hour: '2-digit', // e.g., '09' or '11'
+        minute: '2-digit', // e.g., '05' or '30'
+        // hour12: true // Optional: Set to true for AM/PM explicitly if needed
+    }).replace(/^0/, ''); // Removes leading zero from hour (e.g., "09:30" -> "9:30")
+};
+
+
+// --- Lifecycle Hooks ---
 onMounted(() => {
-  fetchGrillData();
-  setInterval(fetchGrillData, 10000); // 10s refresh
+  console.log('GrillCard mounted. Setting up listeners and clock.');
+
+  // Setup WebSocket listeners
+  socket.on('grillStateUpdate', handleGrillUpdate);
+  socket.on('grillStatus', (statusMsg) => {
+     console.log('Received initial grillStatus:', statusMsg);
+     if (statusMsg.status !== 'ok' && !isConnected.value) {
+         smokerData.value.grillName = statusMsg.status.toUpperCase();
+     }
+  });
+
+  // Setup local clock interval
+  updateCurrentTime(); // Update time immediately on mount
+  clockIntervalId = setInterval(updateCurrentTime, 1000); // Update every second
+
 });
+
+onUnmounted(() => {
+  console.log('GrillCard unmounted. Removing listeners and clock.');
+
+  // Clean up WebSocket listeners
+  socket.off('grillStateUpdate', handleGrillUpdate);
+  socket.off('grillStatus');
+
+  // Clean up the clock interval timer
+  if (clockIntervalId) {
+    clearInterval(clockIntervalId);
+  }
+});
+
 </script>
 
 <template>
-  <!-- Grill Card -->
   <div class="grill-card">
-    <!-- Grill Name -->
     <div class="grill-name">{{ smokerData.grillName }}</div>
 
-    <!-- Grill Temperature Circle -->
     <div class="grill-temp-layer-1">
       <div class="grill-temp-layer-2">
         <span class="grill-temp">{{ temperatureDisplay }}</span>
       </div>
     </div>
 
-    <!-- Grill Logo -->
     <div class="grill-logo">
       <img src="@/assets/grill.png" alt="Grill Logo" class="grill-logo-img" />
     </div>
 
-    <!-- Grill Status Indicator -->
-    <GrillStatusIndicator :status="smokerData.grillSystemStatus" />
+    <GrillStatusIndicator :status="smokerData.systemStatus" :connected="smokerData.connected" />
 
-    <!-- Time and Temperature Info -->
     <div class="grill-info">
-      <p class="grill-time">{{ statusTextDisplay }} {{ smokerData.time }}</p>
-      <p class="grill-set-temp" :style="{ opacity: infoOpacity }">SET TEMP: {{ smokerData.setTemp }}°F</p>
-      <p class="grill-probe-temp" :style="{ opacity: infoOpacity }">PROBE TEMP: {{ smokerData.probeTemp }}°F</p>
+      <p class="grill-time">{{ statusTextDisplay }} {{ currentTime }}</p>
+
+      <p class="grill-set-temp" :style="{ opacity: infoOpacity }">SET TEMP: {{ smokerData.setTemp }}°{{ smokerData.units || 'F' }}</p>
+      <p class="grill-probe-temp" :style="{ opacity: infoOpacity }">PROBE TEMP: {{ smokerData.probeTemp }}°{{ smokerData.units || 'F' }}</p>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Grill Card */
+/* Styles remain the same */
 .grill-card {
-  position: relative; 
+  position: relative;
   width: 580px;
   height: 399px;
-  background: rgba(0, 0, 0, 0.25); 
+  background: rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.27);
   border-radius: 20px;
   backdrop-filter: blur(18.5px);
@@ -125,7 +160,7 @@ onMounted(() => {
 /* Grill Name */
 .grill-name {
   position: absolute;
-  max-width: calc(100% - 100px); 
+  max-width: calc(100% - 100px);
   height: 48px;
   left: 35px; /* Relative to the grill card */
   top: 30px; /* Relative to the grill card */
@@ -203,12 +238,14 @@ onMounted(() => {
   color: #D8D8D8;
 }
 
+/* Modified to hold Status + Time */
 .grill-time {
   position: absolute;
-  width: 300px;
+  width: 300px; /* Adjust width if needed */
   height: 29px;
   left: -15px;
   top: 0;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 .grill-set-temp {

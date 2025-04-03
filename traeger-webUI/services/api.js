@@ -1,17 +1,19 @@
-// services/api.js (in your Nuxt 3 project)
-import axios from 'axios';
+// Deprecated 4/3/2025
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/api', // Express server URL
-  // baseURL: 'https://traeger-webui-backend.onrender.com/api',
-});
+// // services/api.js 
+// import axios from 'axios';
 
-export const getGrillData = async () => {
-  try {
-    const response = await api.get('/grill-data'); // Call the Express endpoint
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching grill data:', error);
-    return null;
-  }
-};
+// const api = axios.create({
+//   baseURL: 'http://localhost:3001/api', // Express server URL
+//   // baseURL: 'https://traeger-webui-backend.onrender.com/api',
+// });
+
+// export const getGrillData = async () => {
+//   try {
+//     const response = await api.get('/grill-data'); // Call the Express endpoint
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error fetching grill data:', error);
+//     return null;
+//   }
+// };

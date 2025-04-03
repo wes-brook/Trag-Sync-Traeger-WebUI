@@ -1,36 +1,38 @@
-<!-- GrillStatusIndicator.vue -->
 <script setup>
+import { computed } from 'vue'; // Import computed if not already
+
 const props = defineProps({
-  status: {
+  status: { // System status code
     type: Number,
     required: true,
+    default: 99
   },
+  connected: { // Whether the server considers the grill connected
+      type: Boolean,
+      required: true,
+      default: false
+  }
 });
 
 const statusColor = computed(() => {
+  // If not connected, always show offline color (e.g., red) regardless of last known status
+  if (!props.connected) {
+      return "#C61013"; // Red for offline/disconnected
+  }
+
+  // If connected, determine color based on system status
   switch (props.status) {
-    // case 1: // Offline
-    //   return "#C61013";
-    case 2: // Sleeping
-      return "#3D10C6";
-    case 3: // Idle
-      return "#C6C610";
-    case 4: // Igniting
-      return "#10C61C";
-    case 5: // Preheating
-      return "#10C61C"
-    case 6: // Manual Cooking (Cooking)
-      return "#10C0C6";
-    case 8: // Cooling
-      return "#C61013";
-    case 9: // Shutdown
-      return "#10C61C"
-    case 10: // Unknown Status - Server Side AWS error (bad)
-      return "#C610B9";
-    case 99: // think this means server online but grill is physically off (unplugged or plugged but switched off)
-      return "#C61013";
-    default:
-      return "#000000"; // Unknown Status - Client Side error (very bad)
+    case 2: return "#3D10C6"; // Sleeping (Purple)
+    case 3: return "#C6C610"; // Idle (Yellow)
+    case 4: return "#10C61C"; // Igniting (Green)
+    case 5: return "#10C61C"; // Preheating (Green)
+    case 6: return "#10C0C6"; // Cooking (Teal/Blue)
+    case 8: return "#C61013"; // Cooling (Red)
+    case 9: return "#10C61C"; // Shut Down (Green - or maybe grey?)
+    case 10: return "#C610B9"; // AWS ERR (Magenta)
+    // Case 99 should be handled by the !props.connected check above now
+    // case 99: return "#C61013";
+    default: return "#808080"; // Unknown Status (Grey)
   }
 });
 </script>
@@ -46,7 +48,8 @@ const statusColor = computed(() => {
   height: 24px;
   left: 20px; /* Relative to the grill card */
   top: 160px; /* Relative to the grill card */
-  background: #10C61C;
+  /* Default background removed, relies solely on computed style */
   border-radius: 50%;
+  transition: background-color 0.3s ease; /* Add smooth transition */
 }
 </style>
